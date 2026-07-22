@@ -19,7 +19,6 @@
             position: relative;
         }
 
-        /* Canvas สำหรับซากุระร่วง */
         #sakura-canvas {
             position: fixed;
             top: 0;
@@ -30,7 +29,6 @@
             z-index: 1;
         }
 
-        /* Cursor Glow Effect */
         .cursor-glow {
             width: 25px;
             height: 25px;
@@ -157,7 +155,6 @@
             margin: 25px 0;
         }
 
-        /* Anime Manga UI Card */
         .manga-card {
             background: rgba(35, 8, 12, 0.75);
             border: 2px solid #ff1e43;
@@ -249,11 +246,11 @@
             box-shadow: 0 0 20px rgba(255, 30, 67, 0.4);
         }
 
-        /* Mascot Chibi มุมขวาล่าง */
+        /* --- Mikasa Mascot มุมขวาล่าง --- */
         .anime-mascot-container {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             z-index: 1000;
             display: flex;
             flex-direction: column;
@@ -277,15 +274,15 @@
         }
 
         .mascot-img {
-            width: 85px;
+            width: 100px;
             height: auto;
-            filter: drop-shadow(0 0 10px #ff1e43);
+            filter: drop-shadow(0 0 12px #ff1e43);
             transition: transform 0.3s ease;
             animation: floatMascot 3s infinite ease-in-out;
         }
 
         .mascot-img:hover {
-            transform: scale(1.15) rotate(6deg);
+            transform: scale(1.15) rotate(-5deg);
         }
 
         @keyframes floatMascot {
@@ -307,9 +304,10 @@
     <button class="bgm-control" id="bgmBtn" onclick="toggleBGM()">🎵 BGM: ปิดอยู่</button>
     <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
 
+    <!-- มิคาสะ Mascot มุมขวาล่าง -->
     <div class="anime-mascot-container" onclick="talkMascot()">
-        <div class="speech-bubble" id="mascotText">ยินดีต้อนรับครับ! ✨ (ลองคลิกดูสิ)</div>
-        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Mascot" class="mascot-img">
+        <div class="speech-bubble" id="mascotText">โลกนี้น่ะ... ช่างโหดร้าย แต่มันก็สวยงาม ✨</div>
+        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/311029c7-5d07-42f2-89db-606548544c06/de3m5e0-16631b81-0f72-46a2-a9b7-b08bc8110b22.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcD03ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6WyJbOHsicGF0aCI6IlwvZlwvMzExMDI5YzctNWQwNy00MmYyLTg5ZGItNjA2NTQ4NTQ0YzA2XC9kZTNtNWUwLTE2NjMxYjgxLTBmNzItNDZhMi1hOWI3LWIwOGJjODExMGIyMi5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.vT7F_W3z_P9iI_o7jXp00p4fE13L9YJ5c9N-92v2z04" alt="Mikasa Ackerman" class="mascot-img">
     </div>
 
     <div class="container">
@@ -499,13 +497,13 @@
         }
         animateSakura();
 
+        /* คำพูดมิคาสะ */
         const quotes = [
-            "ยินดีต้อนรับสู่โปรไฟล์ครับ! 🔥",
-            "เทคนิคเชียงใหม่สุดยอด! 🏫",
-            "เล่นเกมด้วยกันไหมครับ? 🎮",
-            "อย่าลืมกดฟังเพลง BGM ด้านบนนะ 🎵",
-            "ขอให้เป็นวันที่ดีมากๆ ครับ! ✨",
-            "ว้าว! กดตัวละครข้าเรอะ 😳"
+            "ถ้าไม่สู้... ก็ไม่มีวันชนะ! 🔥",
+            "ฉันจะปกป้องเอเรน... และนายด้วย! ⚔️",
+            "โลกนี้น่ะ... ช่างโหดร้าย แต่มันก็สวยงาม ✨",
+            "ยินดีต้อนรับสู่เว็บของภานุวิชญ์ค่ะ! ❤️",
+            "ถ้ายังมีชีวิตอยู่... ก็ทำได้ทุกอย่าง!"
         ];
 
         function talkMascot() {
