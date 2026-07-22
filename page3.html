@@ -106,7 +106,8 @@
             margin: 25px 0;
         }
 
-        .table-container {
+        /* Table Styling */
+        .table-responsive {
             overflow-x: auto;
             margin-top: 15px;
         }
@@ -114,43 +115,44 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            background: rgba(30, 8, 12, 0.85);
+            background: rgba(30, 6, 10, 0.85);
             border: 2px solid #ff1e43;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 0 15px rgba(255, 30, 67, 0.3);
         }
 
-        th {
-            background: linear-gradient(45deg, #800013, #ff1e43);
-            color: #ffffff;
-            font-family: 'Mitr', sans-serif;
-            padding: 14px;
-            font-size: 1.05rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 2px solid #ff1e43;
+        th, td {
+            padding: 14px 18px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 30, 67, 0.25);
+            font-size: 1rem;
         }
 
-        td {
-            padding: 14px;
-            border-bottom: 1px solid rgba(255, 30, 67, 0.2);
-            text-align: center;
-            font-size: 1rem;
+        th {
+            background: linear-gradient(45deg, #800013, #b3001b);
             color: #ffffff;
+            font-family: 'Mitr', sans-serif;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px #000;
         }
 
         tr:hover {
             background: rgba(255, 30, 67, 0.15);
+            transition: background 0.3s ease;
         }
 
-        .time-badge {
-            background: rgba(255, 30, 67, 0.25);
+        td.time-col {
             color: #ff8093;
-            padding: 4px 10px;
-            border-radius: 20px;
-            border: 1px solid #ff1e43;
             font-weight: bold;
+            border-right: 1px solid rgba(255, 30, 67, 0.25);
+        }
+
+        td.activity-col {
+            color: #ffffff;
+            text-align: left;
+            padding-left: 25px;
         }
 
         /* Mikasa Mascot */
@@ -181,7 +183,7 @@
         }
 
         .mascot-img {
-            width: 100px;
+            width: 110px;
             height: auto;
             filter: drop-shadow(0 0 12px #ff1e43);
             transition: transform 0.3s ease;
@@ -209,8 +211,8 @@
     <div class="cursor-glow" id="cursorGlow"></div>
 
     <div class="anime-mascot-container" onclick="talkMascot()">
-        <div class="speech-bubble" id="mascotText">อย่าลืมพักผ่อนด้วยนะคะ 💤</div>
-        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/311029c7-5d07-42f2-89db-606548544c06/de3m5e0-16631b81-0f72-46a2-a9b7-b08bc8110b22.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcD03ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6WyJbOHsicGF0aCI6IlwvZlwvMzExMDI5YzctNWQwNy00MmYyLTg5ZGItNjA2NTQ4NTQ0YzA2XC9kZTNtNWUwLTE2NjMxYjgxLTBmNzItNDZhMi1hOWI3LWIwOGJjODExMGIyMi5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.vT7F_W3z_P9iI_o7jXp00p4fE13L9YJ5c9N-92v2z04" alt="Mikasa Ackerman" class="mascot-img">
+        <div class="speech-bubble" id="mascotText">อย่าลืมพักผ่อนให้เพียงพอนะคะ! ✨</div>
+        <img src="https://i.pinimg.com/originals/3d/bf/9b/3dbf9b7c15efd5f5a2f5df8b8d4fbf9e.png" alt="Mikasa Ackerman" class="mascot-img">
     </div>
 
     <div class="container">
@@ -224,38 +226,38 @@
         
         <hr>
 
-        <div class="table-container">
+        <div class="table-responsive">
             <table>
                 <thead>
                     <tr>
-                        <th>เวลา</th>
-                        <th>กิจกรรมประจำวัน</th>
+                        <th style="width: 30%;">⏰ ช่วงเวลา</th>
+                        <th style="width: 70%;">📝 กิจกรรมที่ทำ</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><span class="time-badge">06:30 - 07:30</span></td>
-                        <td>ตื่นนอน / อาบน้ำแต่งตัว / เตรียมตัวไปเรียน</td>
+                        <td class="time-col">06:00 - 07:00 น.</td>
+                        <td class="activity-col">ตื่นนอน, อาบน้ำ แต่งตัว เตรียมตัวไปวิทยาลัย 🎒</td>
                     </tr>
                     <tr>
-                        <td><span class="time-badge">08:00 - 16:30</span></td>
-                        <td>เรียนหนังสือที่วิทยาลัยเทคนิคเชียงใหม่ 🏫</td>
+                        <td class="time-col">08:00 - 15:00 น.</td>
+                        <td class="activity-col">เข้าชั้นเรียนตามตารางเรียน วิทยาลัยเทคนิคเชียงใหม่ 🏫</td>
                     </tr>
                     <tr>
-                        <td><span class="time-badge">17:00 - 18:00</span></td>
-                        <td>เดินทางกลับบ้าน / พักผ่อน 🏡</td>
+                        <td class="time-col">15:00 - 17:00 น.</td>
+                        <td class="activity-col">เดินทางกลับบ้าน, พักผ่อน หาของอร่อยกิน 🍜</td>
                     </tr>
                     <tr>
-                        <td><span class="time-badge">18:30 - 19:30</span></td>
-                        <td>ทานอาหารเย็น / ทำภารกิจส่วนตัว 🍱</td>
+                        <td class="time-col">17:00 - 20:00 น.</td>
+                        <td class="activity-col">ทำการบ้าน, ทบทวนบทเรียน หรือฝึกทักษะคอมพิวเตอร์ 💻</td>
                     </tr>
                     <tr>
-                        <td><span class="time-badge">20:00 - 23:00</span></td>
-                        <td>เล่นเกม / ดูคลิปบน YouTube / พักผ่อน 🎮📺</td>
+                        <td class="time-col">20:00 - 23:00 น.</td>
+                        <td class="activity-col">เล่นเกม, ดู YouTube, ฟังเพลง ผ่อนคลายความเครียด 🎮🎧</td>
                     </tr>
                     <tr>
-                        <td><span class="time-badge">23:30 เป็นต้นไป</span></td>
-                        <td>เข้านอนพักผ่อน 💤</td>
+                        <td class="time-col">23:00 - 06:00 น.</td>
+                        <td class="activity-col">เข้านอน ชาร์จพลังสำหรับวันใหม่ 😴💤</td>
                     </tr>
                 </tbody>
             </table>
@@ -322,9 +324,10 @@
         animateSakura();
 
         const quotes = [
-            "อย่าลืมจัดเวลาเข้านอนตรงเวลานะคะ 💤",
-            "ช่วงเวลานอนพักผ่อนสำคัญต่อการต่อสู้นะ!",
-            "ตั้งใจเรียนและพักผ่อนให้พอดีค่ะ! ✨"
+            "อย่าลืมพักผ่อนให้เพียงพอนะคะ! ✨",
+            "ตารางเวลามีระเบียบมากเลยค่ะ! 👏",
+            "ช่วง 20:00 น. เล่นเกมอะไรอยู่เหรอคะ? 🎮",
+            "พรุ่งนี้ก็พยายามเข้าล่ะ! ⚔️"
         ];
 
         function talkMascot() {
