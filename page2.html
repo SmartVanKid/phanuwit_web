@@ -196,8 +196,11 @@
 
         .mascot-img {
             width: 110px;
-            height: auto;
-            filter: drop-shadow(0 0 12px #ff1e43);
+            height: 110px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #ff1e43;
+            box-shadow: 0 0 15px #ff1e43;
             transition: transform 0.3s ease;
             animation: floatMascot 3s infinite ease-in-out;
         }
@@ -224,7 +227,7 @@
 
     <div class="anime-mascot-container" onclick="talkMascot()">
         <div class="speech-bubble" id="mascotText">ถ้าไม่สู้... ก็ไม่มีวันชนะ! ⚔️</div>
-        <img src="https://i.pinimg.com/originals/3d/bf/9b/3dbf9b7c15efd5f5a2f5df8b8d4fbf9e.png" alt="Mikasa Ackerman" class="mascot-img">
+        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img">
     </div>
 
     <div class="container">
