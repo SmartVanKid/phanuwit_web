@@ -106,7 +106,6 @@
             margin: 25px 0;
         }
 
-        /* Anime Table Styling */
         .table-container {
             overflow-x: auto;
             margin-top: 15px;
@@ -154,11 +153,11 @@
             font-weight: bold;
         }
 
-        /* Mascot Chibi */
+        /* Mikasa Mascot */
         .anime-mascot-container {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             z-index: 1000;
             display: flex;
             flex-direction: column;
@@ -182,15 +181,15 @@
         }
 
         .mascot-img {
-            width: 85px;
+            width: 100px;
             height: auto;
-            filter: drop-shadow(0 0 10px #ff1e43);
+            filter: drop-shadow(0 0 12px #ff1e43);
             transition: transform 0.3s ease;
             animation: floatMascot 3s infinite ease-in-out;
         }
 
         .mascot-img:hover {
-            transform: scale(1.15) rotate(6deg);
+            transform: scale(1.15) rotate(-5deg);
         }
 
         @keyframes floatMascot {
@@ -210,8 +209,8 @@
     <div class="cursor-glow" id="cursorGlow"></div>
 
     <div class="anime-mascot-container" onclick="talkMascot()">
-        <div class="speech-bubble" id="mascotText">ตารางเวลากิจวัตรครับ ⏰</div>
-        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Mascot" class="mascot-img">
+        <div class="speech-bubble" id="mascotText">อย่าลืมพักผ่อนด้วยนะคะ 💤</div>
+        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/311029c7-5d07-42f2-89db-606548544c06/de3m5e0-16631b81-0f72-46a2-a9b7-b08bc8110b22.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcD03ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6WyJbOHsicGF0aCI6IlwvZlwvMzExMDI5YzctNWQwNy00MmYyLTg5ZGItNjA2NTQ4NTQ0YzA2XC9kZTNtNWUwLTE2NjMxYjgxLTBmNzItNDZhMi1hOWI3LWIwOGJjODExMGIyMi5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.vT7F_W3z_P9iI_o7jXp00p4fE13L9YJ5c9N-92v2z04" alt="Mikasa Ackerman" class="mascot-img">
     </div>
 
     <div class="container">
@@ -323,9 +322,9 @@
         animateSakura();
 
         const quotes = [
-            "อย่าลืมบริหารเวลาพักผ่อนด้วยนะ! ⏰",
-            "นอนดึกไม่ดีต่อสุขภาพนะ! 💤",
-            "ช่วง 20:00 - 23:00 เป็นเวลาเกมสินะ! 🎮"
+            "อย่าลืมจัดเวลาเข้านอนตรงเวลานะคะ 💤",
+            "ช่วงเวลานอนพักผ่อนสำคัญต่อการต่อสู้นะ!",
+            "ตั้งใจเรียนและพักผ่อนให้พอดีค่ะ! ✨"
         ];
 
         function talkMascot() {
