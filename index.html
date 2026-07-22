@@ -20,7 +20,20 @@
             position: relative;
         }
 
-        /* Canvas สำหรับเอฟเฟกต์ละอองไฟ Particle */
+        /* 1. Cursor Effect แสงนีออนตามเมาส์ */
+        .cursor-glow {
+            width: 25px;
+            height: 25px;
+            background: rgba(255, 30, 67, 0.6);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            box-shadow: 0 0 15px #ff1e43, 0 0 30px #ff1e43;
+            transform: translate(-50%, -50%);
+            transition: transform 0.08s ease-out;
+            z-index: 9999;
+        }
+
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -44,7 +57,6 @@
             z-index: 2;
         }
 
-        /* ปุ่มเปิด/ปิดเพลง BGM มุมขวาบน */
         .bgm-control {
             position: fixed;
             top: 20px;
@@ -67,7 +79,6 @@
             box-shadow: 0 0 25px rgba(255, 30, 67, 1);
         }
 
-        /* เมนูนำทาง */
         .navbar {
             display: flex;
             justify-content: center;
@@ -102,7 +113,6 @@
             font-weight: bold;
         }
 
-        /* แถบสภาพอากาศ เวลา และคนเข้าชม */
         .top-widget-bar {
             display: flex;
             justify-content: space-around;
@@ -133,10 +143,11 @@
             font-family: 'Mitr', sans-serif;
             color: #ff2a4b;
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             text-shadow: 0 0 10px #ff002b, 0 0 20px #ff002b;
             letter-spacing: 2px;
             margin-bottom: 20px;
+            min-height: 55px;
         }
 
         hr {
@@ -152,12 +163,13 @@
             padding: 15px 20px;
             margin: 15px 0;
             border-radius: 0 10px 10px 0;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
         }
 
         .info-card:hover {
-            transform: translateX(5px);
+            transform: translateX(8px);
             box-shadow: 0 0 15px rgba(255, 30, 67, 0.4);
+            background: rgba(60, 15, 22, 0.8);
         }
 
         h2 {
@@ -184,7 +196,6 @@
             text-shadow: 0 0 10px #ff002b;
         }
 
-        /* รูปขนาดน่ารัก สมส่วน */
         .image-gallery {
             display: flex;
             justify-content: center;
@@ -200,12 +211,13 @@
             border-radius: 15px;
             border: 2px solid #ff1e43;
             box-shadow: 0 0 15px rgba(255, 0, 43, 0.4);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
         }
 
         .image-gallery img:hover {
-            transform: scale(1.08) rotate(2deg);
-            box-shadow: 0 0 25px rgba(255, 0, 43, 0.8);
+            transform: scale(1.1) rotate(3deg);
+            box-shadow: 0 0 30px rgba(255, 0, 43, 0.9);
+            border-color: #ffffff;
         }
 
         .video-container {
@@ -219,47 +231,25 @@
             border: 2px solid #ff1e43;
             box-shadow: 0 0 20px rgba(255, 30, 67, 0.4);
         }
-
-        .btn-next {
-            background: linear-gradient(45deg, #b3001b, #ff1e43);
-            color: white;
-            padding: 12px 35px;
-            font-size: 18px;
-            font-family: 'Mitr', sans-serif;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 30, 67, 0.6);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-next:hover {
-            background: linear-gradient(45deg, #ff1e43, #ff5572);
-            box-shadow: 0 0 25px rgba(255, 30, 67, 1);
-            transform: translateY(-3px) scale(1.05);
-        }
     </style>
 </head>
 <body>
 
-    <!-- Canvas สำหรับเอฟเฟกต์ละอองไฟ -->
+    <!-- 1. Cursor Light -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
     <canvas id="particle-canvas"></canvas>
 
-    <!-- ปุ่มควบคุมเพลง BGM -->
     <button class="bgm-control" id="bgmBtn" onclick="toggleBGM()">🎵 BGM: ปิดอยู่</button>
     <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
 
     <div class="container">
-        <!-- แถบเมนูตรงกลาง -->
         <div class="navbar">
             <a href="index.html" class="nav-btn active">หน้าแรก (แนะนำตัว)</a>
             <a href="page2.html" class="nav-btn">หน้า 2 (ทักษะและอาชีพ)</a>
             <a href="page3.html" class="nav-btn">หน้า 3 (ตารางกิจวัตรประจำวัน)</a>
         </div>
 
-        <!-- แถบข้อมูล Weather / Time / Visitor Counter -->
         <div class="top-widget-bar">
             <div class="widget-item">
                 ⛅ เชียงใหม่: <span class="widget-value" id="weather">กำลังโหลด...</span>
@@ -272,7 +262,8 @@
             </div>
         </div>
 
-        <h1>นายภานุวิชญ์ สุวรรณรัตน์</h1>
+        <!-- 2. Typing Effect ตรงชื่อ -->
+        <h1 id="typingName"></h1>
         
         <hr>
 
@@ -326,19 +317,29 @@
                     allowfullscreen>
             </iframe>
         </div>
-
-        <br>
-
-        <div style="text-align: center;">
-            <a href="page2.html" style="text-decoration: none;">
-                <button class="btn-next">ถัดไป ➔</button>
-            </a>
-        </div>
     </div>
 
-    <!-- สคริปต์สแกนเวลา, สภาพอากาศ, ละอองไฟ, BGM -->
     <script>
-        // 1. ระบบเวลา
+        // 1. Cursor Effect Script
+        const glow = document.getElementById('cursorGlow');
+        window.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        // 2. Typing Effect Script
+        const text = "นายภานุวิชญ์ สุวรรณรัตน์";
+        let index = 0;
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById("typingName").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 120);
+            }
+        }
+        typeWriter();
+
+        // Clock & Weather & Visitor
         function updateClock() {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString('th-TH');
@@ -346,7 +347,6 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // 2. ดึงสภาพอากาศเชียงใหม่
         async function fetchWeather() {
             try {
                 const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=18.7904&longitude=98.9847&current_weather=true');
@@ -358,13 +358,12 @@
         }
         fetchWeather();
 
-        // 3. นับจำนวนผู้เข้าชม
         let visits = localStorage.getItem('site_visits') || 100;
         visits++;
         localStorage.setItem('site_visits', visits);
         document.getElementById('visitor-count').innerText = visits;
 
-        // 4. ควบคุม BGM
+        // BGM
         const bgmAudio = document.getElementById('bgmAudio');
         const bgmBtn = document.getElementById('bgmBtn');
         function toggleBGM() {
@@ -379,7 +378,7 @@
             }
         }
 
-        // 5. เอฟเฟกต์ละอองไฟ Particle Effect
+        // Particles
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
