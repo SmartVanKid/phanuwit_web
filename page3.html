@@ -29,6 +29,41 @@
             backdrop-filter: blur(5px);
         }
 
+        /* เมนูนำทางด้านบนตรงกลาง */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(40, 10, 15, 0.8);
+            color: #ff8093;
+            border: 1px solid #ff1e43;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-family: 'Mitr', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #ff1e43;
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(255, 30, 67, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, #b3001b, #ff1e43);
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.8);
+            font-weight: bold;
+        }
+
         h1 {
             font-family: 'Mitr', sans-serif;
             color: #ff2a4b;
@@ -38,7 +73,6 @@
             margin-bottom: 25px;
         }
 
-        /* ตารางสไตล์อนิเมะ */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -97,6 +131,13 @@
 <body>
 
     <div class="container">
+        <!-- แถบเมนูตรงกลาง -->
+        <div class="navbar">
+            <a href="index.html" class="nav-btn">หน้าแรก (แนะนำตัว)</a>
+            <a href="page2.html" class="nav-btn">หน้า 2 (ทักษะและอาชีพ)</a>
+            <a href="page3.html" class="nav-btn active">หน้า 3 (ตารางกิจวัตรประจำวัน)</a>
+        </div>
+
         <h1>ตารางกิจวัตรประจำวัน</h1>
 
         <table>
