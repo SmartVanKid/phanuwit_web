@@ -275,8 +275,11 @@
 
         .mascot-img {
             width: 110px;
-            height: auto;
-            filter: drop-shadow(0 0 12px #ff1e43);
+            height: 110px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #ff1e43;
+            box-shadow: 0 0 15px #ff1e43;
             transition: transform 0.3s ease;
             animation: floatMascot 3s infinite ease-in-out;
         }
@@ -304,10 +307,10 @@
     <button class="bgm-control" id="bgmBtn" onclick="toggleBGM()">🎵 BGM: ปิดอยู่</button>
     <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
 
-    <!-- มิคาสะ Mascot มุมขวาล่าง (แก้ลิงก์รูปแล้ว) -->
+    <!-- มิคาสะ Mascot มุมขวาล่าง -->
     <div class="anime-mascot-container" onclick="talkMascot()">
         <div class="speech-bubble" id="mascotText">โลกนี้น่ะ... ช่างโหดร้าย แต่มันก็สวยงาม ✨</div>
-        <img src="https://i.pinimg.com/originals/3d/bf/9b/3dbf9b7c15efd5f5a2f5df8b8d4fbf9e.png" alt="Mikasa Ackerman" class="mascot-img">
+        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img">
     </div>
 
     <div class="container">
