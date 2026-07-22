@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แนะนำตัวเอง</title>
-    <!-- นำเข้าฟอนต์ Google Fonts สไตล์อนิเมะ/โมเดิร์น -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Mitr:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* สไตล์หลักของหน้าเว็บ (Theme: Crimson Red Anime) */
         body {
             background-color: #0d0203;
             background-image: radial-gradient(circle at 50% 20%, #3a0007 0%, #0d0203 80%);
@@ -20,7 +18,6 @@
             padding: 20px;
         }
 
-        /* คอนเทนเนอร์หลัก */
         .container {
             max-width: 850px;
             margin: 0 auto;
@@ -32,7 +29,41 @@
             backdrop-filter: blur(5px);
         }
 
-        /* หัวข้อชื่อ */
+        /* เมนูนำทางด้านบนตรงกลาง */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(40, 10, 15, 0.8);
+            color: #ff8093;
+            border: 1px solid #ff1e43;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-family: 'Mitr', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #ff1e43;
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(255, 30, 67, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, #b3001b, #ff1e43);
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.8);
+            font-weight: bold;
+        }
+
         h1 {
             font-family: 'Mitr', sans-serif;
             color: #ff2a4b;
@@ -43,7 +74,6 @@
             margin-bottom: 20px;
         }
 
-        /* เส้นแบ่ง */
         hr {
             border: none;
             height: 2px;
@@ -51,7 +81,6 @@
             margin: 25px 0;
         }
 
-        /* การ์ดข้อมูลส่วนตัว */
         .info-card {
             background: rgba(40, 10, 15, 0.6);
             border-left: 4px solid #ff1e43;
@@ -70,7 +99,6 @@
             font-size: 1.2rem;
             color: #ff8093;
             margin: 0 0 5px 0;
-            text-transform: uppercase;
         }
 
         p {
@@ -79,7 +107,6 @@
             margin: 0;
         }
 
-        /* ลิงก์ Facebook */
         a.fb-link {
             color: #ff3355;
             text-decoration: none;
@@ -92,7 +119,6 @@
             text-shadow: 0 0 10px #ff002b;
         }
 
-        /* กรอบรูปภาพ */
         .image-gallery {
             display: flex;
             justify-content: center;
@@ -115,7 +141,6 @@
             box-shadow: 0 0 25px rgba(255, 0, 43, 0.7);
         }
 
-        /* กรอบวิดีโอ */
         .video-container {
             display: flex;
             justify-content: center;
@@ -128,7 +153,6 @@
             box-shadow: 0 0 20px rgba(255, 30, 67, 0.4);
         }
 
-        /* กรอบเสียง */
         .audio-container {
             display: flex;
             justify-content: center;
@@ -140,7 +164,6 @@
             box-shadow: 0 0 15px rgba(255, 30, 67, 0.5);
         }
 
-        /* ปุ่มกดถัดไป (Anime Style Button) */
         .btn-next {
             background: linear-gradient(45deg, #b3001b, #ff1e43);
             color: white;
@@ -163,10 +186,15 @@
         }
     </style>
 </head>
-
 <body>
 
     <div class="container">
+        <!-- แถบเมนูตรงกลาง -->
+        <div class="navbar">
+            <a href="index.html" class="nav-btn active">หน้าแรก (แนะนำตัว)</a>
+            <a href="page2.html" class="nav-btn">หน้า 2 (ทักษะและอาชีพ)</a>
+            <a href="page3.html" class="nav-btn">หน้า 3 (ตารางกิจวัตรประจำวัน)</a>
+        </div>
 
         <h1>นายภานุวิชญ์ สุวรรณรัตน์</h1>
         
@@ -234,12 +262,9 @@
 
         <div style="text-align: center;">
             <a href="page2.html" style="text-decoration: none;">
-                <button class="btn-next">
-                    ถัดไป ➔
-                </button>
+                <button class="btn-next">ถัดไป ➔</button>
             </a>
         </div>
-
     </div>
 
 </body>
