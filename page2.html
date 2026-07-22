@@ -20,6 +20,20 @@
             position: relative;
         }
 
+        /* 1. Cursor Light */
+        .cursor-glow {
+            width: 25px;
+            height: 25px;
+            background: rgba(255, 30, 67, 0.6);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            box-shadow: 0 0 15px #ff1e43, 0 0 30px #ff1e43;
+            transform: translate(-50%, -50%);
+            transition: transform 0.08s ease-out;
+            z-index: 9999;
+        }
+
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -132,6 +146,7 @@
             font-size: 2rem;
             text-shadow: 0 0 10px #ff002b, 0 0 20px #ff002b;
             margin-bottom: 25px;
+            min-height: 48px;
         }
 
         hr {
@@ -152,6 +167,12 @@
             border-radius: 12px;
             margin-bottom: 20px;
             flex-wrap: wrap;
+            transition: all 0.3s ease;
+        }
+
+        .content-box:hover {
+            box-shadow: 0 0 20px rgba(255, 30, 67, 0.5);
+            border-color: #ff1e43;
         }
 
         .content-box img {
@@ -165,7 +186,7 @@
         }
 
         .content-box img:hover {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         .content-box ul, .content-box ol {
@@ -173,31 +194,11 @@
             line-height: 1.8;
             color: #f0f0f0;
         }
-
-        .btn-next {
-            background: linear-gradient(45deg, #b3001b, #ff1e43);
-            color: white;
-            padding: 12px 35px;
-            font-size: 18px;
-            font-family: 'Mitr', sans-serif;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 30, 67, 0.6);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-next:hover {
-            background: linear-gradient(45deg, #ff1e43, #ff5572);
-            box-shadow: 0 0 25px rgba(255, 30, 67, 1);
-            transform: translateY(-3px) scale(1.05);
-        }
     </style>
 </head>
 <body>
 
+    <div class="cursor-glow" id="cursorGlow"></div>
     <canvas id="particle-canvas"></canvas>
 
     <button class="bgm-control" id="bgmBtn" onclick="toggleBGM()">🎵 BGM: ปิดอยู่</button>
@@ -222,7 +223,8 @@
             </div>
         </div>
 
-        <h1>รายการทักษะที่ต้องการพัฒนา</h1>
+        <!-- 2. Typing Effect หัวข้อ -->
+        <h1 id="typingTitle1"></h1>
         <div class="content-box">
             <img src="programmer.jpg" alt="ทักษะ">
             <ul>
@@ -235,7 +237,7 @@
 
         <hr>
 
-        <h1>ลำดับอาชีพที่อยากทำ</h1>
+        <h1 id="typingTitle2"></h1>
         <div class="content-box">
             <img src="computer.jpg" alt="อาชีพ">
             <ol>
@@ -244,16 +246,41 @@
                 <li>นักพัฒนาเกม</li>
             </ol>
         </div>
-
-        <br>
-        <div style="text-align: center;">
-            <a href="page3.html" style="text-decoration: none;">
-                <button class="btn-next">ถัดไป ➔</button>
-            </a>
-        </div>
     </div>
 
     <script>
+        // 1. Cursor Light
+        const glow = document.getElementById('cursorGlow');
+        window.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        // 2. Typing Effect Multiple Titles
+        const title1 = "รายการทักษะที่ต้องการพัฒนา";
+        const title2 = "ลำดับอาชีพที่อยากทำ";
+        let idx1 = 0, idx2 = 0;
+
+        function typeTitle1() {
+            if (idx1 < title1.length) {
+                document.getElementById("typingTitle1").innerHTML += title1.charAt(idx1);
+                idx1++;
+                setTimeout(typeTitle1, 100);
+            } else {
+                typeTitle2();
+            }
+        }
+
+        function typeTitle2() {
+            if (idx2 < title2.length) {
+                document.getElementById("typingTitle2").innerHTML += title2.charAt(idx2);
+                idx2++;
+                setTimeout(typeTitle2, 100);
+            }
+        }
+        typeTitle1();
+
+        // Clock & Weather & Visitor
         function updateClock() {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString('th-TH');
@@ -274,6 +301,7 @@
 
         document.getElementById('visitor-count').innerText = localStorage.getItem('site_visits') || 100;
 
+        // BGM
         const bgmAudio = document.getElementById('bgmAudio');
         const bgmBtn = document.getElementById('bgmBtn');
         function toggleBGM() {
@@ -288,6 +316,7 @@
             }
         }
 
+        // Particles
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
