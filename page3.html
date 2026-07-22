@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หน้าที่ 3 - ตารางกิจวัตรประจำวัน</title>
+    <title>ตารางกิจวัตรประจำวัน - Anime Red Neon Style</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Mitr:wght@400;600&display=swap" rel="stylesheet">
@@ -11,7 +11,6 @@
     <style>
         body {
             background-color: #0d0203;
-            background-image: radial-gradient(circle at 50% 20%, #3a0007 0%, #0d0203 80%);
             color: #ffffff;
             font-family: 'Kanit', sans-serif;
             margin: 0;
@@ -20,7 +19,16 @@
             position: relative;
         }
 
-        /* 1. Cursor Light */
+        #sakura-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
         .cursor-glow {
             width: 25px;
             height: 25px;
@@ -34,56 +42,24 @@
             z-index: 9999;
         }
 
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
         .container {
             max-width: 850px;
             margin: 0 auto;
-            background: rgba(20, 5, 7, 0.85);
+            background: rgba(20, 5, 7, 0.88);
             border: 2px solid #ff1e43;
-            box-shadow: 0 0 25px rgba(255, 30, 67, 0.3);
+            box-shadow: 0 0 25px rgba(255, 30, 67, 0.35);
             border-radius: 15px;
             padding: 30px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
             position: relative;
             z-index: 2;
-        }
-
-        .bgm-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 999;
-            background: rgba(30, 5, 10, 0.9);
-            border: 2px solid #ff1e43;
-            color: #fff;
-            padding: 10px 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-family: 'Mitr', sans-serif;
-            font-size: 0.9rem;
-            box-shadow: 0 0 15px rgba(255, 30, 67, 0.6);
-            transition: all 0.3s ease;
-        }
-
-        .bgm-control:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 25px rgba(255, 30, 67, 1);
         }
 
         .navbar {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
         }
 
@@ -113,86 +89,130 @@
             font-weight: bold;
         }
 
-        .top-widget-bar {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background: rgba(40, 10, 15, 0.7);
-            border: 1px solid rgba(255, 30, 67, 0.4);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .widget-item {
-            font-size: 0.95rem;
-            color: #ff8093;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .widget-value {
-            color: #ffffff;
-            font-weight: bold;
-        }
-
         h1 {
             font-family: 'Mitr', sans-serif;
             color: #ff2a4b;
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.2rem;
             text-shadow: 0 0 10px #ff002b, 0 0 20px #ff002b;
+            letter-spacing: 2px;
             margin-bottom: 25px;
-            min-height: 48px;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff1e43, transparent);
+            margin: 25px 0;
+        }
+
+        /* Anime Table Styling */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 15px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            background: rgba(30, 8, 12, 0.8);
-            border-radius: 10px;
+            background: rgba(30, 8, 12, 0.85);
+            border: 2px solid #ff1e43;
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid #ff1e43;
-            box-shadow: 0 0 15px rgba(255, 30, 67, 0.2);
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: center;
-            border: 1px solid rgba(255, 30, 67, 0.3);
-            transition: all 0.2s ease;
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.3);
         }
 
         th {
-            background-color: #ff1e43;
-            color: white;
-            font-family: 'Mitr', sans-serif;
-            font-size: 1.1rem;
-            text-shadow: 0 0 5px #000;
-        }
-
-        tr:nth-child(even) {
-            background-color: rgba(60, 15, 22, 0.4);
-        }
-
-        tr:hover td {
-            background-color: rgba(255, 30, 67, 0.3);
+            background: linear-gradient(45deg, #800013, #ff1e43);
             color: #ffffff;
+            font-family: 'Mitr', sans-serif;
+            padding: 14px;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #ff1e43;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid rgba(255, 30, 67, 0.2);
+            text-align: center;
+            font-size: 1rem;
+            color: #ffffff;
+        }
+
+        tr:hover {
+            background: rgba(255, 30, 67, 0.15);
+        }
+
+        .time-badge {
+            background: rgba(255, 30, 67, 0.25);
+            color: #ff8093;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid #ff1e43;
             font-weight: bold;
+        }
+
+        /* Mascot Chibi */
+        .anime-mascot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .speech-bubble {
+            background: rgba(25, 5, 8, 0.95);
+            border: 2px solid #ff1e43;
+            color: #ffffff;
+            padding: 8px 14px;
+            border-radius: 12px 12px 2px 12px;
+            font-size: 0.88rem;
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.6);
+            margin-bottom: 6px;
+            white-space: nowrap;
+            transition: transform 0.2s ease;
+            animation: floatBubble 2.5s infinite alternate ease-in-out;
+        }
+
+        .mascot-img {
+            width: 85px;
+            height: auto;
+            filter: drop-shadow(0 0 10px #ff1e43);
+            transition: transform 0.3s ease;
+            animation: floatMascot 3s infinite ease-in-out;
+        }
+
+        .mascot-img:hover {
+            transform: scale(1.15) rotate(6deg);
+        }
+
+        @keyframes floatMascot {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes floatBubble {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
         }
     </style>
 </head>
 <body>
 
+    <canvas id="sakura-canvas"></canvas>
     <div class="cursor-glow" id="cursorGlow"></div>
-    <canvas id="particle-canvas"></canvas>
 
-    <button class="bgm-control" id="bgmBtn" onclick="toggleBGM()">🎵 BGM: ปิดอยู่</button>
-    <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
+    <div class="anime-mascot-container" onclick="talkMascot()">
+        <div class="speech-bubble" id="mascotText">ตารางเวลากิจวัตรครับ ⏰</div>
+        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Mascot" class="mascot-img">
+    </div>
 
     <div class="container">
         <div class="navbar">
@@ -201,158 +221,123 @@
             <a href="page3.html" class="nav-btn active">หน้า 3 (ตารางกิจวัตรประจำวัน)</a>
         </div>
 
-        <div class="top-widget-bar">
-            <div class="widget-item">
-                ⛅ เชียงใหม่: <span class="widget-value" id="weather">กำลังโหลด...</span>
-            </div>
-            <div class="widget-item">
-                ⏰ เวลา: <span class="widget-value" id="clock">00:00:00</span>
-            </div>
-            <div class="widget-item">
-                👀 เข้าชม: <span class="widget-value" id="visitor-count">1,245</span> คน
-            </div>
+        <h1>📅 ตารางกิจวัตรประจำวัน</h1>
+        
+        <hr>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>เวลา</th>
+                        <th>กิจกรรมประจำวัน</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="time-badge">06:30 - 07:30</span></td>
+                        <td>ตื่นนอน / อาบน้ำแต่งตัว / เตรียมตัวไปเรียน</td>
+                    </tr>
+                    <tr>
+                        <td><span class="time-badge">08:00 - 16:30</span></td>
+                        <td>เรียนหนังสือที่วิทยาลัยเทคนิคเชียงใหม่ 🏫</td>
+                    </tr>
+                    <tr>
+                        <td><span class="time-badge">17:00 - 18:00</span></td>
+                        <td>เดินทางกลับบ้าน / พักผ่อน 🏡</td>
+                    </tr>
+                    <tr>
+                        <td><span class="time-badge">18:30 - 19:30</span></td>
+                        <td>ทานอาหารเย็น / ทำภารกิจส่วนตัว 🍱</td>
+                    </tr>
+                    <tr>
+                        <td><span class="time-badge">20:00 - 23:00</span></td>
+                        <td>เล่นเกม / ดูคลิปบน YouTube / พักผ่อน 🎮📺</td>
+                    </tr>
+                    <tr>
+                        <td><span class="time-badge">23:30 เป็นต้นไป</span></td>
+                        <td>เข้านอนพักผ่อน 💤</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-        <!-- 2. Typing Effect หัวข้อตาราง -->
-        <h1 id="typingTitle3"></h1>
-
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 25%;">วัน</th>
-                    <th>กิจกรรม</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>จันทร์</strong></td>
-                    <td>นอน / ทำการบ้าน / เล่นเกม</td>
-                </tr>
-                <tr>
-                    <td><strong>อังคาร</strong></td>
-                    <td>นอน / ดูยูทูป / พักผ่อน</td>
-                </tr>
-                <tr>
-                    <td><strong>พุธ</strong></td>
-                    <td>งานบ้าน / เล่นเกม / ออกกำลังกาย</td>
-                </tr>
-                <tr>
-                    <td><strong>พฤหัสบดี</strong></td>
-                    <td>นอน / ฝึกเขียนเว็บไซต์</td>
-                </tr>
-                <tr>
-                    <td><strong>ศุกร์</strong></td>
-                    <td>นอน / เล่นเกมกับเพื่อน / ออกกำลังกาย</td>
-                </tr>
-                <tr>
-                    <td><strong>เสาร์</strong></td>
-                    <td>นอน / ดูหนัง / เล่นเกม</td>
-                </tr>
-                <tr>
-                    <td><strong>อาทิตย์</strong></td>
-                    <td>ทำการบ้าน / เตรียมตัวไปเรียน / ออกกำลังกาย</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 
     <script>
-        // 1. Cursor Light
         const glow = document.getElementById('cursorGlow');
         window.addEventListener('mousemove', (e) => {
             glow.style.left = e.clientX + 'px';
             glow.style.top = e.clientY + 'px';
         });
 
-        // 2. Typing Effect
-        const title3 = "ตารางกิจวัตรประจำวัน";
-        let idx3 = 0;
-        function typeTitle3() {
-            if (idx3 < title3.length) {
-                document.getElementById("typingTitle3").innerHTML += title3.charAt(idx3);
-                idx3++;
-                setTimeout(typeTitle3, 120);
-            }
+        const sakuraCanvas = document.getElementById('sakura-canvas');
+        const sCtx = sakuraCanvas.getContext('2d');
+
+        function resizeSakura() {
+            sakuraCanvas.width = window.innerWidth;
+            sakuraCanvas.height = window.innerHeight;
         }
-        typeTitle3();
+        window.addEventListener('resize', resizeSakura);
+        resizeSakura();
 
-        // Clock & Weather & Visitor
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleTimeString('th-TH');
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        async function fetchWeather() {
-            try {
-                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=18.7904&longitude=98.9847&current_weather=true');
-                const data = await res.json();
-                document.getElementById('weather').innerText = `${Math.round(data.current_weather.temperature)}°C`;
-            } catch (e) {
-                document.getElementById('weather').innerText = '28°C';
-            }
-        }
-        fetchWeather();
-
-        document.getElementById('visitor-count').innerText = localStorage.getItem('site_visits') || 100;
-
-        // BGM
-        const bgmAudio = document.getElementById('bgmAudio');
-        const bgmBtn = document.getElementById('bgmBtn');
-        function toggleBGM() {
-            if (bgmAudio.paused) {
-                bgmAudio.play();
-                bgmBtn.innerText = "🔊 BGM: เล่นอยู่";
-                bgmBtn.style.background = "#ff1e43";
-            } else {
-                bgmAudio.pause();
-                bgmBtn.innerText = "🎵 BGM: ปิดอยู่";
-                bgmBtn.style.background = "rgba(30, 5, 10, 0.9)";
-            }
-        }
-
-        // Particles
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        const particles = [];
-        for (let i = 0; i < 50; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 2 + 1,
-                speedY: Math.random() * 1 + 0.5,
-                speedX: Math.random() * 0.6 - 0.3,
-                alpha: Math.random()
+        const petals = [];
+        for (let i = 0; i < 40; i++) {
+            petals.push({
+                x: Math.random() * sakuraCanvas.width,
+                y: Math.random() * sakuraCanvas.height,
+                size: Math.random() * 6 + 4,
+                speedY: Math.random() * 1.4 + 0.6,
+                speedX: Math.random() * 1 - 0.5,
+                angle: Math.random() * 360,
+                spin: Math.random() * 0.04 - 0.02,
+                color: Math.random() > 0.35 ? '#ff1e43' : '#ff8093'
             });
         }
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
+        function animateSakura() {
+            sCtx.clearRect(0, 0, sakuraCanvas.width, sakuraCanvas.height);
+            petals.forEach(p => {
                 p.y += p.speedY;
-                p.x += p.speedX;
-                if (p.y > canvas.height) p.y = 0;
-                if (p.x > canvas.width || p.x < 0) p.x = Math.random() * canvas.width;
+                p.x += Math.sin(p.angle) * 0.7;
+                p.angle += p.spin;
 
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 30, 67, ${p.alpha})`;
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = "#ff1e43";
-                ctx.fill();
+                if (p.y > sakuraCanvas.height) {
+                    p.y = -10;
+                    p.x = Math.random() * sakuraCanvas.width;
+                }
+
+                sCtx.save();
+                sCtx.translate(p.x, p.y);
+                sCtx.rotate(p.angle);
+                sCtx.beginPath();
+                sCtx.ellipse(0, 0, p.size, p.size / 2, 0, 0, Math.PI * 2);
+                sCtx.fillStyle = p.color;
+                sCtx.globalAlpha = 0.75;
+                sCtx.shadowBlur = 8;
+                sCtx.shadowColor = p.color;
+                sCtx.fill();
+                sCtx.restore();
             });
-            requestAnimationFrame(animateParticles);
+            requestAnimationFrame(animateSakura);
         }
-        animateParticles();
+        animateSakura();
+
+        const quotes = [
+            "อย่าลืมบริหารเวลาพักผ่อนด้วยนะ! ⏰",
+            "นอนดึกไม่ดีต่อสุขภาพนะ! 💤",
+            "ช่วง 20:00 - 23:00 เป็นเวลาเกมสินะ! 🎮"
+        ];
+
+        function talkMascot() {
+            const bubble = document.getElementById('mascotText');
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            bubble.innerText = randomQuote;
+
+            bubble.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                bubble.style.transform = 'scale(1)';
+            }, 200);
+        }
     </script>
 </body>
 </html>
