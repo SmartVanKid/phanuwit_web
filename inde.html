@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แนะนำตัวเอง</title>
+    <!-- นำเข้าฟอนต์ Google Fonts สไตล์อนิเมะ/โมเดิร์น -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Mitr:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* สไตล์หลักของหน้าเว็บ (Theme: Crimson Red Anime) */
+        body {
+            background-color: #0d0203;
+            background-image: radial-gradient(circle at 50% 20%, #3a0007 0%, #0d0203 80%);
+            color: #ffffff;
+            font-family: 'Kanit', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* คอนเทนเนอร์หลัก */
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: rgba(20, 5, 7, 0.85);
+            border: 2px solid #ff1e43;
+            box-shadow: 0 0 25px rgba(255, 30, 67, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* หัวข้อชื่อ */
+        h1 {
+            font-family: 'Mitr', sans-serif;
+            color: #ff2a4b;
+            text-align: center;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px #ff002b, 0 0 20px #ff002b;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        /* เส้นแบ่ง */
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff1e43, transparent);
+            margin: 25px 0;
+        }
+
+        /* การ์ดข้อมูลส่วนตัว */
+        .info-card {
+            background: rgba(40, 10, 15, 0.6);
+            border-left: 4px solid #ff1e43;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .info-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.4);
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: #ff8093;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        /* ลิงก์ Facebook */
+        a.fb-link {
+            color: #ff3355;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        a.fb-link:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff002b;
+        }
+
+        /* กรอบรูปภาพ */
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .image-gallery img {
+            width: 100%;
+            max-width: 380px;
+            border-radius: 10px;
+            border: 2px solid #ff1e43;
+            box-shadow: 0 0 15px rgba(255, 0, 43, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px rgba(255, 0, 43, 0.7);
+        }
+
+        /* กรอบวิดีโอ */
+        .video-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .video-container iframe {
+            border-radius: 12px;
+            border: 2px solid #ff1e43;
+            box-shadow: 0 0 20px rgba(255, 30, 67, 0.4);
+        }
+
+        /* กรอบเสียง */
+        .audio-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        audio {
+            border-radius: 30px;
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.5);
+        }
+
+        /* ปุ่มกดถัดไป (Anime Style Button) */
+        .btn-next {
+            background: linear-gradient(45deg, #b3001b, #ff1e43);
+            color: white;
+            padding: 12px 35px;
+            font-size: 18px;
+            font-family: 'Mitr', sans-serif;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.6);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-next:hover {
+            background: linear-gradient(45deg, #ff1e43, #ff5572);
+            box-shadow: 0 0 25px rgba(255, 30, 67, 1);
+            transform: translateY(-3px) scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>นายภานุวิชญ์ สุวรรณรัตน์</h1>
+        
+        <hr>
+
+        <div class="info-card">
+            <h2>วันเกิด</h2>
+            <p>30/03/2553</p>
+        </div>
+
+        <div class="info-card">
+            <h2>อายุ</h2>
+            <p>16 ปี</p>
+        </div>
+
+        <div class="info-card">
+            <h2>สถานศึกษาปัจจุบัน</h2>
+            <p>วิทยาลัยเทคนิคเชียงใหม่</p>
+        </div>
+
+        <div class="info-card">
+            <h2>สิ่งที่ชอบ</h2>
+            <p>นอน / เกม / ดูยูทูป</p>
+        </div>
+
+        <div class="info-card">
+            <h2>ลิงก์เฟสของฉัน</h2>
+            <p>
+                <a class="fb-link" href="https://www.facebook.com/pha.nu.wichy.suwrrn.ratn?locale=th_TH" target="_blank">
+                    Facebook Profile ➔
+                </a>
+            </p>
+        </div>
+
+        <hr>
+
+        <h2 style="text-align: center; color: #ff1e43; font-size: 1.5rem; text-shadow: 0 0 8px #ff002b;">
+            รูปของฉัน
+        </h2>
+        <div class="image-gallery">
+            <img src="018.jpg" alt="รูปของฉัน 1">
+            <img src="67.jpg" alt="รูปของฉัน 2">
+        </div>
+
+        <hr>
+
+        <div class="video-container">
+            <iframe width="315" height="560" 
+                    src="https://www.youtube.com/embed/Hs3SSMrR55k" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="audio-container">
+            <audio controls>
+                <source src="mysong.mp3.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <br>
+
+        <div style="text-align: center;">
+            <a href="page2.html" style="text-decoration: none;">
+                <button class="btn-next">
+                    ถัดไป ➔
+                </button>
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>
