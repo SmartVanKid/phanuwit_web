@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แนะนำตัวเอง</title>
+    <title>แนะนำตัวเอง - Anime Red Neon Style</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Mitr:wght@400;600&display=swap" rel="stylesheet">
@@ -11,7 +11,6 @@
     <style>
         body {
             background-color: #0d0203;
-            background-image: radial-gradient(circle at 50% 20%, #3a0007 0%, #0d0203 80%);
             color: #ffffff;
             font-family: 'Kanit', sans-serif;
             margin: 0;
@@ -20,7 +19,18 @@
             position: relative;
         }
 
-        /* 1. Cursor Effect แสงนีออนตามเมาส์ */
+        /* Canvas สำหรับซากุระร่วง */
+        #sakura-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Cursor Glow Effect */
         .cursor-glow {
             width: 25px;
             height: 25px;
@@ -34,25 +44,15 @@
             z-index: 9999;
         }
 
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
         .container {
             max-width: 850px;
             margin: 0 auto;
-            background: rgba(20, 5, 7, 0.85);
+            background: rgba(20, 5, 7, 0.88);
             border: 2px solid #ff1e43;
-            box-shadow: 0 0 25px rgba(255, 30, 67, 0.3);
+            box-shadow: 0 0 25px rgba(255, 30, 67, 0.35);
             border-radius: 15px;
             padding: 30px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
             position: relative;
             z-index: 2;
         }
@@ -157,25 +157,42 @@
             margin: 25px 0;
         }
 
-        .info-card {
-            background: rgba(40, 10, 15, 0.6);
-            border-left: 4px solid #ff1e43;
-            padding: 15px 20px;
-            margin: 15px 0;
-            border-radius: 0 10px 10px 0;
+        /* Anime Manga UI Card */
+        .manga-card {
+            background: rgba(35, 8, 12, 0.75);
+            border: 2px solid #ff1e43;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            position: relative;
+            box-shadow: 4px 4px 0px #ff1e43, 0 0 12px rgba(255, 30, 67, 0.25);
             transition: all 0.3s ease;
         }
 
-        .info-card:hover {
-            transform: translateX(8px);
-            box-shadow: 0 0 15px rgba(255, 30, 67, 0.4);
-            background: rgba(60, 15, 22, 0.8);
+        .manga-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 7px 7px 0px #ff2a4b, 0 0 20px rgba(255, 30, 67, 0.5);
+            background: rgba(55, 12, 18, 0.85);
+        }
+
+        .manga-tag {
+            position: absolute;
+            top: -11px;
+            left: 15px;
+            background: #ff1e43;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         h2 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: #ff8093;
-            margin: 0 0 5px 0;
+            margin: 4px 0 2px 0;
         }
 
         p {
@@ -231,17 +248,69 @@
             border: 2px solid #ff1e43;
             box-shadow: 0 0 20px rgba(255, 30, 67, 0.4);
         }
+
+        /* Mascot Chibi มุมขวาล่าง */
+        .anime-mascot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .speech-bubble {
+            background: rgba(25, 5, 8, 0.95);
+            border: 2px solid #ff1e43;
+            color: #ffffff;
+            padding: 8px 14px;
+            border-radius: 12px 12px 2px 12px;
+            font-size: 0.88rem;
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.6);
+            margin-bottom: 6px;
+            white-space: nowrap;
+            transition: transform 0.2s ease;
+            animation: floatBubble 2.5s infinite alternate ease-in-out;
+        }
+
+        .mascot-img {
+            width: 85px;
+            height: auto;
+            filter: drop-shadow(0 0 10px #ff1e43);
+            transition: transform 0.3s ease;
+            animation: floatMascot 3s infinite ease-in-out;
+        }
+
+        .mascot-img:hover {
+            transform: scale(1.15) rotate(6deg);
+        }
+
+        @keyframes floatMascot {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes floatBubble {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
     </style>
 </head>
 <body>
 
-    <!-- 1. Cursor Light -->
+    <canvas id="sakura-canvas"></canvas>
     <div class="cursor-glow" id="cursorGlow"></div>
-
-    <canvas id="particle-canvas"></canvas>
 
     <button class="bgm-control" id="bgmBtn" onclick="toggleBGM()">🎵 BGM: ปิดอยู่</button>
     <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
+
+    <div class="anime-mascot-container" onclick="talkMascot()">
+        <div class="speech-bubble" id="mascotText">ยินดีต้อนรับครับ! ✨ (ลองคลิกดูสิ)</div>
+        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Mascot" class="mascot-img">
+    </div>
 
     <div class="container">
         <div class="navbar">
@@ -262,32 +331,36 @@
             </div>
         </div>
 
-        <!-- 2. Typing Effect ตรงชื่อ -->
         <h1 id="typingName"></h1>
         
         <hr>
 
-        <div class="info-card">
+        <div class="manga-card">
+            <div class="manga-tag">PROFILE</div>
             <h2>วันเกิด</h2>
             <p>30/03/2553</p>
         </div>
 
-        <div class="info-card">
+        <div class="manga-card">
+            <div class="manga-tag">AGE</div>
             <h2>อายุ</h2>
             <p>16 ปี</p>
         </div>
 
-        <div class="info-card">
+        <div class="manga-card">
+            <div class="manga-tag">ACADEMY</div>
             <h2>สถานศึกษาปัจจุบัน</h2>
             <p>วิทยาลัยเทคนิคเชียงใหม่</p>
         </div>
 
-        <div class="info-card">
+        <div class="manga-card">
+            <div class="manga-tag">HOBBIES</div>
             <h2>สิ่งที่ชอบ</h2>
             <p>นอน / เกม / ดูยูทูป</p>
         </div>
 
-        <div class="info-card">
+        <div class="manga-card">
+            <div class="manga-tag">SOCIAL</div>
             <h2>ลิงก์เฟสของฉัน</h2>
             <p>
                 <a class="fb-link" href="https://www.facebook.com/pha.nu.wichy.suwrrn.ratn?locale=th_TH" target="_blank">
@@ -299,7 +372,7 @@
         <hr>
 
         <h2 style="text-align: center; color: #ff1e43; font-size: 1.5rem; text-shadow: 0 0 8px #ff002b;">
-            รูปของฉัน
+            📷 Gallery
         </h2>
         <div class="image-gallery">
             <img src="018.jpg" alt="รูปของฉัน 1">
@@ -320,14 +393,12 @@
     </div>
 
     <script>
-        // 1. Cursor Effect Script
         const glow = document.getElementById('cursorGlow');
         window.addEventListener('mousemove', (e) => {
             glow.style.left = e.clientX + 'px';
             glow.style.top = e.clientY + 'px';
         });
 
-        // 2. Typing Effect Script
         const text = "นายภานุวิชญ์ สุวรรณรัตน์";
         let index = 0;
         function typeWriter() {
@@ -339,7 +410,6 @@
         }
         typeWriter();
 
-        // Clock & Weather & Visitor
         function updateClock() {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString('th-TH');
@@ -363,7 +433,6 @@
         localStorage.setItem('site_visits', visits);
         document.getElementById('visitor-count').innerText = visits;
 
-        // BGM
         const bgmAudio = document.getElementById('bgmAudio');
         const bgmBtn = document.getElementById('bgmBtn');
         function toggleBGM() {
@@ -378,47 +447,77 @@
             }
         }
 
-        // Particles
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        const sakuraCanvas = document.getElementById('sakura-canvas');
+        const sCtx = sakuraCanvas.getContext('2d');
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
+        function resizeSakura() {
+            sakuraCanvas.width = window.innerWidth;
+            sakuraCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeSakura);
+        resizeSakura();
 
-        const particles = [];
-        for (let i = 0; i < 50; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 2 + 1,
-                speedY: Math.random() * 1 + 0.5,
-                speedX: Math.random() * 0.6 - 0.3,
-                alpha: Math.random()
+        const petals = [];
+        for (let i = 0; i < 40; i++) {
+            petals.push({
+                x: Math.random() * sakuraCanvas.width,
+                y: Math.random() * sakuraCanvas.height,
+                size: Math.random() * 6 + 4,
+                speedY: Math.random() * 1.4 + 0.6,
+                speedX: Math.random() * 1 - 0.5,
+                angle: Math.random() * 360,
+                spin: Math.random() * 0.04 - 0.02,
+                color: Math.random() > 0.35 ? '#ff1e43' : '#ff8093'
             });
         }
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
+        function animateSakura() {
+            sCtx.clearRect(0, 0, sakuraCanvas.width, sakuraCanvas.height);
+            petals.forEach(p => {
                 p.y += p.speedY;
-                p.x += p.speedX;
-                if (p.y > canvas.height) p.y = 0;
-                if (p.x > canvas.width || p.x < 0) p.x = Math.random() * canvas.width;
+                p.x += Math.sin(p.angle) * 0.7;
+                p.angle += p.spin;
 
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 30, 67, ${p.alpha})`;
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = "#ff1e43";
-                ctx.fill();
+                if (p.y > sakuraCanvas.height) {
+                    p.y = -10;
+                    p.x = Math.random() * sakuraCanvas.width;
+                }
+
+                sCtx.save();
+                sCtx.translate(p.x, p.y);
+                sCtx.rotate(p.angle);
+                sCtx.beginPath();
+                sCtx.ellipse(0, 0, p.size, p.size / 2, 0, 0, Math.PI * 2);
+                sCtx.fillStyle = p.color;
+                sCtx.globalAlpha = 0.75;
+                sCtx.shadowBlur = 8;
+                sCtx.shadowColor = p.color;
+                sCtx.fill();
+                sCtx.restore();
             });
-            requestAnimationFrame(animateParticles);
+            requestAnimationFrame(animateSakura);
         }
-        animateParticles();
+        animateSakura();
+
+        const quotes = [
+            "ยินดีต้อนรับสู่โปรไฟล์ครับ! 🔥",
+            "เทคนิคเชียงใหม่สุดยอด! 🏫",
+            "เล่นเกมด้วยกันไหมครับ? 🎮",
+            "อย่าลืมกดฟังเพลง BGM ด้านบนนะ 🎵",
+            "ขอให้เป็นวันที่ดีมากๆ ครับ! ✨",
+            "ว้าว! กดตัวละครข้าเรอะ 😳"
+        ];
+
+        function talkMascot() {
+            const bubble = document.getElementById('mascotText');
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            bubble.innerText = randomQuote;
+
+            bubble.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                bubble.style.transform = 'scale(1)';
+            }, 200);
+        }
     </script>
 </body>
 </html>
