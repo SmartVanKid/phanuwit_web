@@ -20,6 +20,20 @@
             position: relative;
         }
 
+        /* 1. Cursor Light */
+        .cursor-glow {
+            width: 25px;
+            height: 25px;
+            background: rgba(255, 30, 67, 0.6);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            box-shadow: 0 0 15px #ff1e43, 0 0 30px #ff1e43;
+            transform: translate(-50%, -50%);
+            transition: transform 0.08s ease-out;
+            z-index: 9999;
+        }
+
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -132,6 +146,7 @@
             font-size: 2rem;
             text-shadow: 0 0 10px #ff002b, 0 0 20px #ff002b;
             margin-bottom: 25px;
+            min-height: 48px;
         }
 
         table {
@@ -149,6 +164,7 @@
             padding: 12px 15px;
             text-align: center;
             border: 1px solid rgba(255, 30, 67, 0.3);
+            transition: all 0.2s ease;
         }
 
         th {
@@ -163,34 +179,16 @@
             background-color: rgba(60, 15, 22, 0.4);
         }
 
-        tr:hover {
-            background-color: rgba(255, 30, 67, 0.2);
-        }
-
-        .btn-next {
-            background: linear-gradient(45deg, #b3001b, #ff1e43);
-            color: white;
-            padding: 12px 35px;
-            font-size: 18px;
-            font-family: 'Mitr', sans-serif;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 30, 67, 0.6);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-next:hover {
-            background: linear-gradient(45deg, #ff1e43, #ff5572);
-            box-shadow: 0 0 25px rgba(255, 30, 67, 1);
-            transform: translateY(-3px) scale(1.05);
+        tr:hover td {
+            background-color: rgba(255, 30, 67, 0.3);
+            color: #ffffff;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
+    <div class="cursor-glow" id="cursorGlow"></div>
     <canvas id="particle-canvas"></canvas>
 
     <button class="bgm-control" id="bgmBtn" onclick="toggleBGM()">🎵 BGM: ปิดอยู่</button>
@@ -215,7 +213,8 @@
             </div>
         </div>
 
-        <h1>ตารางกิจวัตรประจำวัน</h1>
+        <!-- 2. Typing Effect หัวข้อตาราง -->
+        <h1 id="typingTitle3"></h1>
 
         <table>
             <thead>
@@ -255,16 +254,29 @@
                 </tr>
             </tbody>
         </table>
-
-        <br>
-        <div style="text-align: center;">
-            <a href="index.html" style="text-decoration: none;">
-                <button class="btn-next">🏠 กลับหน้าแรก</button>
-            </a>
-        </div>
     </div>
 
     <script>
+        // 1. Cursor Light
+        const glow = document.getElementById('cursorGlow');
+        window.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        // 2. Typing Effect
+        const title3 = "ตารางกิจวัตรประจำวัน";
+        let idx3 = 0;
+        function typeTitle3() {
+            if (idx3 < title3.length) {
+                document.getElementById("typingTitle3").innerHTML += title3.charAt(idx3);
+                idx3++;
+                setTimeout(typeTitle3, 120);
+            }
+        }
+        typeTitle3();
+
+        // Clock & Weather & Visitor
         function updateClock() {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString('th-TH');
@@ -285,6 +297,7 @@
 
         document.getElementById('visitor-count').innerText = localStorage.getItem('site_visits') || 100;
 
+        // BGM
         const bgmAudio = document.getElementById('bgmAudio');
         const bgmBtn = document.getElementById('bgmBtn');
         function toggleBGM() {
@@ -299,6 +312,7 @@
             }
         }
 
+        // Particles
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
