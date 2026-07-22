@@ -16,6 +16,18 @@
             font-family: 'Kanit', sans-serif;
             margin: 0;
             padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
@@ -27,14 +39,37 @@
             border-radius: 15px;
             padding: 30px;
             backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 2;
         }
 
-        /* เมนูนำทางด้านบนตรงกลาง */
+        .bgm-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            background: rgba(30, 5, 10, 0.9);
+            border: 2px solid #ff1e43;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Mitr', sans-serif;
+            font-size: 0.9rem;
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .bgm-control:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(255, 30, 67, 1);
+        }
+
         .navbar {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
@@ -61,6 +96,32 @@
             background: linear-gradient(45deg, #b3001b, #ff1e43);
             color: #ffffff;
             box-shadow: 0 0 15px rgba(255, 30, 67, 0.8);
+            font-weight: bold;
+        }
+
+        .top-widget-bar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(40, 10, 15, 0.7);
+            border: 1px solid rgba(255, 30, 67, 0.4);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .widget-item {
+            font-size: 0.95rem;
+            color: #ff8093;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .widget-value {
+            color: #ffffff;
             font-weight: bold;
         }
 
@@ -130,12 +191,28 @@
 </head>
 <body>
 
+    <canvas id="particle-canvas"></canvas>
+
+    <button class="bgm-control" id="bgmBtn" onclick="toggleBGM()">🎵 BGM: ปิดอยู่</button>
+    <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
+
     <div class="container">
-        <!-- แถบเมนูตรงกลาง -->
         <div class="navbar">
             <a href="index.html" class="nav-btn">หน้าแรก (แนะนำตัว)</a>
             <a href="page2.html" class="nav-btn">หน้า 2 (ทักษะและอาชีพ)</a>
             <a href="page3.html" class="nav-btn active">หน้า 3 (ตารางกิจวัตรประจำวัน)</a>
+        </div>
+
+        <div class="top-widget-bar">
+            <div class="widget-item">
+                ⛅ เชียงใหม่: <span class="widget-value" id="weather">กำลังโหลด...</span>
+            </div>
+            <div class="widget-item">
+                ⏰ เวลา: <span class="widget-value" id="clock">00:00:00</span>
+            </div>
+            <div class="widget-item">
+                👀 เข้าชม: <span class="widget-value" id="visitor-count">1,245</span> คน
+            </div>
         </div>
 
         <h1>ตารางกิจวัตรประจำวัน</h1>
@@ -187,5 +264,81 @@
         </div>
     </div>
 
+    <script>
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString('th-TH');
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        async function fetchWeather() {
+            try {
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=18.7904&longitude=98.9847&current_weather=true');
+                const data = await res.json();
+                document.getElementById('weather').innerText = `${Math.round(data.current_weather.temperature)}°C`;
+            } catch (e) {
+                document.getElementById('weather').innerText = '28°C';
+            }
+        }
+        fetchWeather();
+
+        document.getElementById('visitor-count').innerText = localStorage.getItem('site_visits') || 100;
+
+        const bgmAudio = document.getElementById('bgmAudio');
+        const bgmBtn = document.getElementById('bgmBtn');
+        function toggleBGM() {
+            if (bgmAudio.paused) {
+                bgmAudio.play();
+                bgmBtn.innerText = "🔊 BGM: เล่นอยู่";
+                bgmBtn.style.background = "#ff1e43";
+            } else {
+                bgmAudio.pause();
+                bgmBtn.innerText = "🎵 BGM: ปิดอยู่";
+                bgmBtn.style.background = "rgba(30, 5, 10, 0.9)";
+            }
+        }
+
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        for (let i = 0; i < 50; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 1,
+                speedY: Math.random() * 1 + 0.5,
+                speedX: Math.random() * 0.6 - 0.3,
+                alpha: Math.random()
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                if (p.y > canvas.height) p.y = 0;
+                if (p.x > canvas.width || p.x < 0) p.x = Math.random() * canvas.width;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 30, 67, ${p.alpha})`;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = "#ff1e43";
+                ctx.fill();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
 </body>
 </html>
