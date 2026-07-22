@@ -1,76 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
-    <title>หน้าที่ 3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าที่ 3 - ตารางกิจวัตรประจำวัน</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Mitr:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #0d0203;
+            background-image: radial-gradient(circle at 50% 20%, #3a0007 0%, #0d0203 80%);
+            color: #ffffff;
+            font-family: 'Kanit', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: rgba(20, 5, 7, 0.85);
+            border: 2px solid #ff1e43;
+            box-shadow: 0 0 25px rgba(255, 30, 67, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-family: 'Mitr', sans-serif;
+            color: #ff2a4b;
+            text-align: center;
+            font-size: 2rem;
+            text-shadow: 0 0 10px #ff002b, 0 0 20px #ff002b;
+            margin-bottom: 25px;
+        }
+
+        /* ตารางสไตล์อนิเมะ */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(30, 8, 12, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #ff1e43;
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.2);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 30, 67, 0.3);
+        }
+
+        th {
+            background-color: #ff1e43;
+            color: white;
+            font-family: 'Mitr', sans-serif;
+            font-size: 1.1rem;
+            text-shadow: 0 0 5px #000;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(60, 15, 22, 0.4);
+        }
+
+        tr:hover {
+            background-color: rgba(255, 30, 67, 0.2);
+        }
+
+        .btn-next {
+            background: linear-gradient(45deg, #b3001b, #ff1e43);
+            color: white;
+            padding: 12px 35px;
+            font-size: 18px;
+            font-family: 'Mitr', sans-serif;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 30, 67, 0.6);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-next:hover {
+            background: linear-gradient(45deg, #ff1e43, #ff5572);
+            box-shadow: 0 0 25px rgba(255, 30, 67, 1);
+            transform: translateY(-3px) scale(1.05);
+        }
+    </style>
 </head>
+<body>
 
-<body style="background-color:#FFF0CC; text-align:center; font-family:courier;">
+    <div class="container">
+        <h1>ตารางกิจวัตรประจำวัน</h1>
 
-    <h1 style="color:orange;">
-        ตารางกิจวัตรประจำวัน
-    </h1>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">วัน</th>
+                    <th>กิจกรรม</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>จันทร์</strong></td>
+                    <td>นอน / ทำการบ้าน / เล่นเกม</td>
+                </tr>
+                <tr>
+                    <td><strong>อังคาร</strong></td>
+                    <td>นอน / ดูยูทูป / พักผ่อน</td>
+                </tr>
+                <tr>
+                    <td><strong>พุธ</strong></td>
+                    <td>งานบ้าน / เล่นเกม / ออกกำลังกาย</td>
+                </tr>
+                <tr>
+                    <td><strong>พฤหัสบดี</strong></td>
+                    <td>นอน / ฝึกเขียนเว็บไซต์</td>
+                </tr>
+                <tr>
+                    <td><strong>ศุกร์</strong></td>
+                    <td>นอน / เล่นเกมกับเพื่อน / ออกกำลังกาย</td>
+                </tr>
+                <tr>
+                    <td><strong>เสาร์</strong></td>
+                    <td>นอน / ดูหนัง / เล่นเกม</td>
+                </tr>
+                <tr>
+                    <td><strong>อาทิตย์</strong></td>
+                    <td>ทำการบ้าน / เตรียมตัวไปเรียน / ออกกำลังกาย</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <table border="1" cellpadding="10" style="
-        margin:auto;
-        font-size:20px;
-        background-color:white;
-    ">
-
-        <tr>
-            <th>วัน</th>
-            <th>กิจกรรม</th>
-        </tr>
-
-        <tr>
-            <td>จันทร์</td>
-            <td>นอน / ทำการบ้าน / เล่นเกม</td>
-        </tr>
-
-        <tr>
-            <td>อังคาร</td>
-            <td>นอน / ดูยูทูป / พักผ่อน</td>
-        </tr>
-
-        <tr>
-            <td>พุธ</td>
-            <td>งานบ้าน / เล่นเกม / ออกกำลังกาย</td>
-        </tr>
-
-        <tr>
-            <td>พฤหัสบดี</td>
-            <td>นอน / ฝึกเขียนเว็บไซต์</td>
-        </tr>
-
-        <tr>
-            <td>ศุกร์</td>
-            <td>นอน / เล่นเกมกับเพื่อน / ออกกำลังกาย</td>
-        </tr>
-
-        <tr>
-            <td>เสาร์</td>
-            <td>นอน / ดูหนัง / เล่นเกม</td>
-        </tr>
-
-        <tr>
-            <td>อาทิตย์</td>
-            <td>ทำการบ้าน / เตรียมตัวไปเรียน / ออกกำลังกาย</td>
-        </tr>
-
-    </table>
-
-    <br><br>
-
-    <a href="index.html">
-        <button style="
-            background-color:lightgreen;
-            padding:10px 20px;
-            border:none;
-            border-radius:10px;
-            font-size:18px;
-            cursor:pointer;">
-            กลับหน้าแรก
-        </button>
-    </a>
+        <br>
+        <div style="text-align: center;">
+            <a href="index.html" style="text-decoration: none;">
+                <button class="btn-next">🏠 กลับหน้าแรก</button>
+            </a>
+        </div>
+    </div>
 
 </body>
 </html>
