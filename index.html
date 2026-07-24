@@ -3,20 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แนะนำตัวเอง - Anime Red Neon Style</title>
+    <title>แนะนำตัวเอง - Anime Neon Style</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Mitr:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --primary-color: #ff1e43;
+            --primary-glow: #ff002b;
+            --primary-light: #ff8093;
+            --bg-color: #0d0203;
+            --card-bg: rgba(20, 5, 7, 0.88);
+            --manga-bg: rgba(35, 8, 12, 0.75);
+        }
+
+        /* Blue Theme variables */
+        body.blue-theme {
+            --primary-color: #00d2ff;
+            --primary-glow: #00aaff;
+            --primary-light: #80e5ff;
+            --bg-color: #020b14;
+            --card-bg: rgba(5, 15, 28, 0.88);
+            --manga-bg: rgba(8, 25, 45, 0.75);
+        }
+
         body {
-            background-color: #0d0203;
+            background-color: var(--bg-color);
             color: #ffffff;
             font-family: 'Kanit', sans-serif;
             margin: 0;
             padding: 20px;
             overflow-x: hidden;
             position: relative;
+            transition: background-color 0.5s ease;
         }
 
         #sakura-canvas {
@@ -32,49 +52,56 @@
         .cursor-glow {
             width: 25px;
             height: 25px;
-            background: rgba(255, 30, 67, 0.6);
+            background: var(--primary-color);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
-            box-shadow: 0 0 15px #ff1e43, 0 0 30px #ff1e43;
+            box-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color);
             transform: translate(-50%, -50%);
             transition: transform 0.08s ease-out;
             z-index: 9999;
+            opacity: 0.6;
+        }
+
+        .top-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background: rgba(30, 5, 10, 0.9);
+            border: 2px solid var(--primary-color);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Mitr', sans-serif;
+            font-size: 0.85rem;
+            box-shadow: 0 0 15px var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px var(--primary-color);
         }
 
         .container {
             max-width: 850px;
             margin: 0 auto;
-            background: rgba(20, 5, 7, 0.88);
-            border: 2px solid #ff1e43;
-            box-shadow: 0 0 25px rgba(255, 30, 67, 0.35);
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 25px var(--primary-color);
             border-radius: 15px;
             padding: 30px;
             backdrop-filter: blur(8px);
             position: relative;
             z-index: 2;
-        }
-
-        .bgm-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 999;
-            background: rgba(30, 5, 10, 0.9);
-            border: 2px solid #ff1e43;
-            color: #fff;
-            padding: 10px 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-family: 'Mitr', sans-serif;
-            font-size: 0.9rem;
-            box-shadow: 0 0 15px rgba(255, 30, 67, 0.6);
-            transition: all 0.3s ease;
-        }
-
-        .bgm-control:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 25px rgba(255, 30, 67, 1);
+            transition: all 0.5s ease;
         }
 
         .navbar {
@@ -87,8 +114,8 @@
 
         .nav-btn {
             background: rgba(40, 10, 15, 0.8);
-            color: #ff8093;
-            border: 1px solid #ff1e43;
+            color: var(--primary-light);
+            border: 1px solid var(--primary-color);
             padding: 8px 18px;
             border-radius: 20px;
             text-decoration: none;
@@ -98,16 +125,16 @@
         }
 
         .nav-btn:hover {
-            background: #ff1e43;
+            background: var(--primary-color);
             color: #ffffff;
-            box-shadow: 0 0 12px rgba(255, 30, 67, 0.8);
+            box-shadow: 0 0 12px var(--primary-color);
             transform: translateY(-2px);
         }
 
         .nav-btn.active {
-            background: linear-gradient(45deg, #b3001b, #ff1e43);
+            background: var(--primary-color);
             color: #ffffff;
-            box-shadow: 0 0 15px rgba(255, 30, 67, 0.8);
+            box-shadow: 0 0 15px var(--primary-color);
             font-weight: bold;
         }
 
@@ -116,7 +143,7 @@
             justify-content: space-around;
             align-items: center;
             background: rgba(40, 10, 15, 0.7);
-            border: 1px solid rgba(255, 30, 67, 0.4);
+            border: 1px solid var(--primary-color);
             border-radius: 12px;
             padding: 12px;
             margin-bottom: 25px;
@@ -126,10 +153,7 @@
 
         .widget-item {
             font-size: 0.95rem;
-            color: #ff8093;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            color: var(--primary-light);
         }
 
         .widget-value {
@@ -139,10 +163,10 @@
 
         h1 {
             font-family: 'Mitr', sans-serif;
-            color: #ff2a4b;
+            color: var(--primary-color);
             text-align: center;
             font-size: 2.3rem;
-            text-shadow: 0 0 10px #ff002b, 0 0 20px #ff002b;
+            text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow);
             letter-spacing: 2px;
             margin-bottom: 20px;
             min-height: 55px;
@@ -151,44 +175,42 @@
         hr {
             border: none;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #ff1e43, transparent);
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
             margin: 25px 0;
         }
 
         .manga-card {
-            background: rgba(35, 8, 12, 0.75);
-            border: 2px solid #ff1e43;
+            background: var(--manga-bg);
+            border: 2px solid var(--primary-color);
             border-radius: 12px;
             padding: 16px 20px;
             margin: 16px 0;
             position: relative;
-            box-shadow: 4px 4px 0px #ff1e43, 0 0 12px rgba(255, 30, 67, 0.25);
+            box-shadow: 4px 4px 0px var(--primary-color), 0 0 12px rgba(255, 30, 67, 0.25);
             transition: all 0.3s ease;
         }
 
         .manga-card:hover {
             transform: translate(-3px, -3px);
-            box-shadow: 7px 7px 0px #ff2a4b, 0 0 20px rgba(255, 30, 67, 0.5);
-            background: rgba(55, 12, 18, 0.85);
+            box-shadow: 7px 7px 0px var(--primary-color), 0 0 20px var(--primary-color);
         }
 
         .manga-tag {
             position: absolute;
             top: -11px;
             left: 15px;
-            background: #ff1e43;
+            background: var(--primary-color);
             color: #ffffff;
             font-size: 0.75rem;
             font-weight: bold;
             padding: 2px 8px;
             border-radius: 4px;
             letter-spacing: 1px;
-            text-transform: uppercase;
         }
 
         h2 {
             font-size: 1.15rem;
-            color: #ff8093;
+            color: var(--primary-light);
             margin: 4px 0 2px 0;
         }
 
@@ -199,15 +221,87 @@
         }
 
         a.fb-link {
-            color: #ff3355;
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s, text-shadow 0.3s;
+            transition: all 0.3s;
         }
 
         a.fb-link:hover {
             color: #ffffff;
-            text-shadow: 0 0 10px #ff002b;
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        /* Game & Anime Section */
+        .favorite-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .fav-item {
+            background: rgba(10, 5, 15, 0.6);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .fav-item h3 {
+            margin: 5px 0;
+            color: var(--primary-light);
+            font-size: 1rem;
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 0.9rem;
+        }
+
+        /* Guestbook Section */
+        .guestbook-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .guestbook-input {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--primary-color);
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .guestbook-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Mitr', sans-serif;
+            font-weight: bold;
+        }
+
+        .comments-list {
+            max-height: 150px;
+            overflow-y: auto;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .comment-item {
+            background: rgba(255,255,255,0.05);
+            padding: 8px 12px;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary-color);
+            font-size: 0.95rem;
         }
 
         .image-gallery {
@@ -223,14 +317,13 @@
             height: 180px;
             object-fit: cover;
             border-radius: 15px;
-            border: 2px solid #ff1e43;
-            box-shadow: 0 0 15px rgba(255, 0, 43, 0.4);
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 15px var(--primary-color);
             transition: all 0.3s ease;
         }
 
         .image-gallery img:hover {
             transform: scale(1.1) rotate(3deg);
-            box-shadow: 0 0 30px rgba(255, 0, 43, 0.9);
             border-color: #ffffff;
         }
 
@@ -242,11 +335,11 @@
 
         .video-container iframe {
             border-radius: 12px;
-            border: 2px solid #ff1e43;
-            box-shadow: 0 0 20px rgba(255, 30, 67, 0.4);
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 20px var(--primary-color);
         }
 
-        /* --- Mikasa Mascot มุมขวาล่าง --- */
+        /* --- Mikasa Mascot --- */
         .anime-mascot-container {
             position: fixed;
             bottom: 15px;
@@ -261,16 +354,32 @@
 
         .speech-bubble {
             background: rgba(25, 5, 8, 0.95);
-            border: 2px solid #ff1e43;
+            border: 2px solid var(--primary-color);
             color: #ffffff;
             padding: 8px 14px;
             border-radius: 12px 12px 2px 12px;
             font-size: 0.88rem;
-            box-shadow: 0 0 15px rgba(255, 30, 67, 0.6);
+            box-shadow: 0 0 15px var(--primary-color);
             margin-bottom: 6px;
             white-space: nowrap;
             transition: transform 0.2s ease;
             animation: floatBubble 2.5s infinite alternate ease-in-out;
+        }
+
+        .mascot-menu {
+            display: none;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .mascot-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
         }
 
         .mascot-img {
@@ -278,8 +387,8 @@
             height: 110px;
             object-fit: cover;
             border-radius: 50%;
-            border: 2px solid #ff1e43;
-            box-shadow: 0 0 15px #ff1e43;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 15px var(--primary-color);
             transition: transform 0.3s ease;
             animation: floatMascot 3s infinite ease-in-out;
         }
@@ -304,13 +413,23 @@
     <canvas id="sakura-canvas"></canvas>
     <div class="cursor-glow" id="cursorGlow"></div>
 
-    <button class="bgm-control" id="bgmBtn" onclick="toggleBGM()">🎵 BGM: ปิดอยู่</button>
+    <div class="top-controls">
+        <button class="control-btn" onclick="toggleTheme()">🎨 สลับสีธีม</button>
+        <button class="control-btn" id="bgmBtn" onclick="toggleBGM()">🎵 BGM: ปิดอยู่</button>
+    </div>
+    
     <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
 
-    <!-- มิคาสะ Mascot มุมขวาล่าง -->
-    <div class="anime-mascot-container" onclick="talkMascot()">
-        <div class="speech-bubble" id="mascotText">โลกนี้น่ะ... ช่างโหดร้าย แต่มันก็สวยงาม ✨</div>
-        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img">
+    <!-- มิคาสะ Mascot มุมขวาล่าง + Mini Game -->
+    <div class="anime-mascot-container">
+        <div class="speech-bubble" id="mascotText">คลิกตัวฉันเพื่อเล่นสุ่มดวง/เป่ายิ้งฉุบได้นะ! ✨</div>
+        <div class="mascot-menu" id="mascotMenu">
+            <button class="mascot-btn" onclick="drawFortune()">🔮 สุ่มดวงวันนี้</button>
+            <button class="mascot-btn" onclick="playRPS('ค้อน')">✊ ค้อน</button>
+            <button class="mascot-btn" onclick="playRPS('กรรไกร')">✌️ กรรไกร</button>
+            <button class="mascot-btn" onclick="playRPS('กระดาษ')">✋ กระดาษ</button>
+        </div>
+        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img" onclick="toggleMascotMenu()">
     </div>
 
     <div class="container">
@@ -370,9 +489,42 @@
             </p>
         </div>
 
+        <!-- โซนเกมและอนิเมะเรื่องโปรด -->
+        <div class="manga-card">
+            <div class="manga-tag">FAVORITES</div>
+            <h2>🎮 เกม & อนิเมะเรื่องโปรด</h2>
+            <div class="favorite-grid">
+                <div class="fav-item">
+                    <h3>Attack on Titan</h3>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="fav-item">
+                    <h3>Genshin Impact</h3>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="fav-item">
+                    <h3>Valorant</h3>
+                    <div class="stars">⭐⭐⭐⭐☆</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- สมุดเยี่ยมฝากข้อความ -->
+        <div class="manga-card">
+            <div class="manga-tag">GUESTBOOK</div>
+            <h2>💬 สมุดเยี่ยม (ฝากข้อความไว้ได้นะ)</h2>
+            <div class="guestbook-box">
+                <input type="text" id="guestInput" class="guestbook-input" placeholder="พิมพ์ข้อความทักทายตรงนี้..." maxLength="60">
+                <button class="guestbook-btn" onclick="addComment()">ส่งข้อความ ✨</button>
+            </div>
+            <div class="comments-list" id="commentsList">
+                <div class="comment-item">ยินดีต้อนรับสู่เว็บไซต์ของผมครับ! 👋</div>
+            </div>
+        </div>
+
         <hr>
 
-        <h2 style="text-align: center; color: #ff1e43; font-size: 1.5rem; text-shadow: 0 0 8px #ff002b;">
+        <h2 style="text-align: center; color: var(--primary-color); font-size: 1.5rem;">
             📷 Gallery
         </h2>
         <div class="image-gallery">
@@ -394,12 +546,25 @@
     </div>
 
     <script>
+        // Glow Effect
         const glow = document.getElementById('cursorGlow');
         window.addEventListener('mousemove', (e) => {
             glow.style.left = e.clientX + 'px';
             glow.style.top = e.clientY + 'px';
         });
 
+        // Theme Switcher
+        function toggleTheme() {
+            document.body.classList.toggle('blue-theme');
+            const isBlue = document.body.classList.contains('blue-theme');
+            localStorage.setItem('theme', isBlue ? 'blue' : 'red');
+            updateSakuraColor();
+        }
+        if (localStorage.getItem('theme') === 'blue') {
+            document.body.classList.add('blue-theme');
+        }
+
+        // Typing Text
         const text = "นายภานุวิชญ์ สุวรรณรัตน์";
         let index = 0;
         function typeWriter() {
@@ -411,6 +576,7 @@
         }
         typeWriter();
 
+        // Clock & Weather & Visitor
         function updateClock() {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString('th-TH');
@@ -434,23 +600,35 @@
         localStorage.setItem('site_visits', visits);
         document.getElementById('visitor-count').innerText = visits;
 
+        // BGM
         const bgmAudio = document.getElementById('bgmAudio');
         const bgmBtn = document.getElementById('bgmBtn');
         function toggleBGM() {
             if (bgmAudio.paused) {
                 bgmAudio.play();
                 bgmBtn.innerText = "🔊 BGM: เล่นอยู่";
-                bgmBtn.style.background = "#ff1e43";
             } else {
                 bgmAudio.pause();
                 bgmBtn.innerText = "🎵 BGM: ปิดอยู่";
-                bgmBtn.style.background = "rgba(30, 5, 10, 0.9)";
             }
         }
 
+        // Guestbook
+        function addComment() {
+            const input = document.getElementById('guestInput');
+            const list = document.getElementById('commentsList');
+            if(input.value.trim() !== '') {
+                const item = document.createElement('div');
+                item.className = 'comment-item';
+                item.innerText = input.value;
+                list.prepend(item);
+                input.value = '';
+            }
+        }
+
+        // Sakura Effect
         const sakuraCanvas = document.getElementById('sakura-canvas');
         const sCtx = sakuraCanvas.getContext('2d');
-
         function resizeSakura() {
             sakuraCanvas.width = window.innerWidth;
             sakuraCanvas.height = window.innerHeight;
@@ -468,12 +646,12 @@
                 speedX: Math.random() * 1 - 0.5,
                 angle: Math.random() * 360,
                 spin: Math.random() * 0.04 - 0.02,
-                color: Math.random() > 0.35 ? '#ff1e43' : '#ff8093'
             });
         }
 
         function animateSakura() {
             sCtx.clearRect(0, 0, sakuraCanvas.width, sakuraCanvas.height);
+            const isBlue = document.body.classList.contains('blue-theme');
             petals.forEach(p => {
                 p.y += p.speedY;
                 p.x += Math.sin(p.angle) * 0.7;
@@ -489,10 +667,10 @@
                 sCtx.rotate(p.angle);
                 sCtx.beginPath();
                 sCtx.ellipse(0, 0, p.size, p.size / 2, 0, 0, Math.PI * 2);
-                sCtx.fillStyle = p.color;
+                sCtx.fillStyle = isBlue ? '#00d2ff' : '#ff1e43';
                 sCtx.globalAlpha = 0.75;
                 sCtx.shadowBlur = 8;
-                sCtx.shadowColor = p.color;
+                sCtx.shadowColor = sCtx.fillStyle;
                 sCtx.fill();
                 sCtx.restore();
             });
@@ -500,23 +678,37 @@
         }
         animateSakura();
 
-        const quotes = [
-            "ถ้าไม่สู้... ก็ไม่มีวันชนะ! 🔥",
-            "ฉันจะปกป้องเอเรน... และนายด้วย! ⚔️",
-            "โลกนี้น่ะ... ช่างโหดร้าย แต่มันก็สวยงาม ✨",
-            "ยินดีต้อนรับสู่เว็บของภานุวิชญ์ค่ะ! ❤️",
-            "ถ้ายังมีชีวิตอยู่... ก็ทำได้ทุกอย่าง!"
-        ];
+        // Mascot Interactive & Games
+        function toggleMascotMenu() {
+            const menu = document.getElementById('mascotMenu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
 
-        function talkMascot() {
-            const bubble = document.getElementById('mascotText');
-            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-            bubble.innerText = randomQuote;
+        function drawFortune() {
+            const fortunes = [
+                "🔮 ดวงวันนี้: โชคดีขั้นสุด! เล่นเกมชนะรวดแน่นอน!",
+                "🔮 ดวงวันนี้: ราบรื่นดี การเรียนปัง ไร้ปัญหา!",
+                "🔮 ดวงวันนี้: พักผ่อนเยอะๆ แล้วความสุขจะมาเยือน!",
+                "🔮 ดวงวันนี้: มีเกณฑ์จะได้กินของอร่อยเร็วๆ นี้!"
+            ];
+            const result = fortunes[Math.floor(Math.random() * fortunes.length)];
+            document.getElementById('mascotText').innerText = result;
+        }
 
-            bubble.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                bubble.style.transform = 'scale(1)';
-            }, 200);
+        function playRPS(userChoice) {
+            const choices = ['ค้อน', 'กรรไกร', 'กระดาษ'];
+            const botChoice = choices[Math.floor(Math.random() * choices.length)];
+            let result = `ฉันออก ${botChoice}! `;
+
+            if (userChoice === botChoice) result += "เสมอเลยนะ! 🤝";
+            else if (
+                (userChoice === 'ค้อน' && botChoice === 'กรรไกร') ||
+                (userChoice === 'กรรไกร' && botChoice === 'กระดาษ') ||
+                (userChoice === 'กระดาษ' && botChoice === 'ค้อน')
+            ) result += "คุณชนะแล้ว... เก่งจัง! 🎉";
+            else result += "ฉันชนะล่ะ! ลองใหม่อีกทีนะ ⚔️";
+
+            document.getElementById('mascotText').innerText = result;
         }
     </script>
 </body>
