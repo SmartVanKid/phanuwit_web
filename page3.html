@@ -212,12 +212,6 @@
             margin: 4px 0 2px 0;
         }
 
-        p {
-            font-size: 1.1rem;
-            color: #ffffff;
-            margin: 0;
-        }
-
         ul.schedule-list {
             list-style: none;
             padding: 0;
@@ -262,22 +256,6 @@
             animation: floatBubble 2.5s infinite alternate ease-in-out;
         }
 
-        .mascot-menu {
-            display: none;
-            gap: 5px;
-            margin-bottom: 5px;
-        }
-
-        .mascot-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            cursor: pointer;
-        }
-
         .mascot-img {
             width: 110px;
             height: 110px;
@@ -316,16 +294,9 @@
     
     <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
 
-    <!-- มิคาสะ Mascot -->
-    <div class="anime-mascot-container">
-        <div class="speech-bubble" id="mascotText">คลิกตัวฉันเพื่อคุย / เล่นสุ่มดวง และเป่ายิ้งฉุบได้นะ! ✨</div>
-        <div class="mascot-menu" id="mascotMenu">
-            <button class="mascot-btn" onclick="drawFortune()">🔮 สุ่มดวงวันนี้</button>
-            <button class="mascot-btn" onclick="playRPS('ค้อน')">✊ ค้อน</button>
-            <button class="mascot-btn" onclick="playRPS('กรรไกร')">✌️ กรรไกร</button>
-            <button class="mascot-btn" onclick="playRPS('กระดาษ')">✋ กระดาษ</button>
-        </div>
-        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img" onclick="onMascotClick()">
+    <div class="anime-mascot-container" onclick="onMascotClick()">
+        <div class="speech-bubble" id="mascotText">ถ้าไม่สู้... ก็ไม่มีวันชนะ! ⚔️</div>
+        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img">
     </div>
 
     <div class="container">
@@ -356,30 +327,21 @@
             <h2>ตารางประจำวัน</h2>
             <ul class="schedule-list">
                 <li>🌅 <strong>07:00 - 08:00 น. :</strong> ตื่นนอน เตรีมตัวเดินทางไปวิทยาลัยเทคนิคเชียงใหม่</li>
-                <li>💻 <strong>08:00 - 15:30 น. :</strong> เรียนหนังสือ ทำแล็ปอิเล็กทรอนิกส์ & ฟิสิกส์</li>
-                <li>🎮 <strong>16:00 - 18:00 น. :</strong> พักผ่อน เล่นเกม Roblox และพูดคุยกับเพื่อนๆ</li>
-                <li>⚡ <strong>19:00 - 21:00 น. :</strong> ทำการบ้าน ทบทวนบทเรียน และศึกษาเขียนโค้ดเพิ่มเติม</li>
+                <li>💻 <strong>08:00 - 15:30 น. :</strong> เรียนหนังสือ และปฏิบัติกิจกรรมการเรียน</li>
+                <li>🎮 <strong>16:00 - 18:00 น. :</strong> พักผ่อน เล่นเกม และพูดคุยกับเพื่อนๆ</li>
+                <li>⚡ <strong>19:00 - 21:00 น. :</strong> ทำการบ้าน ทบทวนบทเรียน</li>
                 <li>🌙 <strong>22:00 น. เป็นต้นไป :</strong> ฟังเพลง พักผ่อน เตรียมตัวเข้านอน</li>
             </ul>
-        </div>
-
-        <div class="manga-card">
-            <div class="manga-tag">CONTACT</div>
-            <h2>ช่องทางการติดต่อเพิ่มเติม</h2>
-            <p>📧 Email: contact@example.com</p>
-            <p>💬 Line: @neonstyle</p>
         </div>
     </div>
 
     <script>
-        // Glow Effect
         const glow = document.getElementById('cursorGlow');
         window.addEventListener('mousemove', (e) => {
             glow.style.left = e.clientX + 'px';
             glow.style.top = e.clientY + 'px';
         });
 
-        // Theme Switcher
         function toggleTheme() {
             document.body.classList.toggle('blue-theme');
             const isBlue = document.body.classList.contains('blue-theme');
@@ -389,7 +351,6 @@
             document.body.classList.add('blue-theme');
         }
 
-        // Clock & Weather & Visitor
         function updateClock() {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString('th-TH');
@@ -411,7 +372,6 @@
         let visits = localStorage.getItem('site_visits') || 100;
         document.getElementById('visitor-count').innerText = visits;
 
-        // BGM
         const bgmAudio = document.getElementById('bgmAudio');
         const bgmBtn = document.getElementById('bgmBtn');
         function toggleBGM() {
@@ -424,7 +384,6 @@
             }
         }
 
-        // Sakura Effect
         const sakuraCanvas = document.getElementById('sakura-canvas');
         const sCtx = sakuraCanvas.getContext('2d');
         function resizeSakura() {
@@ -476,7 +435,6 @@
         }
         animateSakura();
 
-        // --- Mascot Interactive & Games Logic ---
         const quotes = [
             "ถ้าไม่สู้... ก็ไม่มีวันชนะ! ⚔️",
             "ยินดีที่ได้คุยกันนะ! ตั้งใจเรียนและเล่นเกมให้สนุกนะ ✨",
@@ -487,38 +445,8 @@
         ];
 
         function onMascotClick() {
-            const menu = document.getElementById('mascotMenu');
-            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-
             const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
             document.getElementById('mascotText').innerText = randomQuote;
-        }
-
-        function drawFortune() {
-            const fortunes = [
-                "🔮 ดวงวันนี้: โชคดีขั้นสุด! เล่นเกม Roblox ชนะแน่นอน!",
-                "🔮 ดวงวันนี้: ราบรื่นดี การเรียนปัง ไร้ปัญหา!",
-                "🔮 ดวงวันนี้: พักผ่อนเยอะๆ แล้วความสุขจะมาเยือน!",
-                "🔮 ดวงวันนี้: มีเกณฑ์จะได้กินของอร่อยเร็วๆ นี้!"
-            ];
-            const result = fortunes[Math.floor(Math.random() * fortunes.length)];
-            document.getElementById('mascotText').innerText = result;
-        }
-
-        function playRPS(userChoice) {
-            const choices = ['ค้อน', 'กรรไกร', 'กระดาษ'];
-            const botChoice = choices[Math.floor(Math.random() * choices.length)];
-            let result = `ฉันออก ${botChoice}! `;
-
-            if (userChoice === botChoice) result += "เสมอเลยนะ! 🤝";
-            else if (
-                (userChoice === 'ค้อน' && botChoice === 'กรรไกร') ||
-                (userChoice === 'กรรไกร' && botChoice === 'กระดาษ') ||
-                (userChoice === 'กระดาษ' && botChoice === 'ค้อน')
-            ) result += "คุณชนะแล้ว... เก่งจัง! 🎉";
-            else result += "ฉันชนะล่ะ! ลองใหม่อีกทีนะ ⚔️";
-
-            document.getElementById('mascotText').innerText = result;
         }
     </script>
 </body>
