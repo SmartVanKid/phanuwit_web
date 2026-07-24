@@ -18,7 +18,6 @@
             --manga-bg: rgba(35, 8, 12, 0.75);
         }
 
-        /* Blue Theme variables */
         body.blue-theme {
             --primary-color: #00d2ff;
             --primary-glow: #00aaff;
@@ -232,7 +231,6 @@
             text-shadow: 0 0 10px var(--primary-color);
         }
 
-        /* Game & Anime Section */
         .favorite-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -259,7 +257,6 @@
             font-size: 0.9rem;
         }
 
-        /* Guestbook Section */
         .guestbook-box {
             display: flex;
             flex-direction: column;
@@ -420,16 +417,16 @@
     
     <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
 
-    <!-- มิคาสะ Mascot มุมขวาล่าง + Mini Game -->
+    <!-- มิคาสะ Mascot มุมขวาล่าง + Mini Game + สุ่มคำพูดเมื่อกดตัว -->
     <div class="anime-mascot-container">
-        <div class="speech-bubble" id="mascotText">คลิกตัวฉันเพื่อเล่นสุ่มดวง/เป่ายิ้งฉุบได้นะ! ✨</div>
+        <div class="speech-bubble" id="mascotText">คลิกตัวฉันเพื่อคุย / เล่นสุ่มดวง และเป่ายิ้งฉุบได้นะ! ✨</div>
         <div class="mascot-menu" id="mascotMenu">
             <button class="mascot-btn" onclick="drawFortune()">🔮 สุ่มดวงวันนี้</button>
             <button class="mascot-btn" onclick="playRPS('ค้อน')">✊ ค้อน</button>
             <button class="mascot-btn" onclick="playRPS('กรรไกร')">✌️ กรรไกร</button>
             <button class="mascot-btn" onclick="playRPS('กระดาษ')">✋ กระดาษ</button>
         </div>
-        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img" onclick="toggleMascotMenu()">
+        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img" onclick="onMascotClick()">
     </div>
 
     <div class="container">
@@ -489,7 +486,7 @@
             </p>
         </div>
 
-        <!-- โซนเกมและอนิเมะเรื่องโปรด -->
+        <!-- โซนเกมและอนิเมะเรื่องโปรด (เปลี่ยน Genshin Impact เป็น Roblox ตามสั่ง) -->
         <div class="manga-card">
             <div class="manga-tag">FAVORITES</div>
             <h2>🎮 เกม & อนิเมะเรื่องโปรด</h2>
@@ -499,7 +496,7 @@
                     <div class="stars">⭐⭐⭐⭐⭐</div>
                 </div>
                 <div class="fav-item">
-                    <h3>Genshin Impact</h3>
+                    <h3>Roblox</h3>
                     <div class="stars">⭐⭐⭐⭐⭐</div>
                 </div>
                 <div class="fav-item">
@@ -558,7 +555,6 @@
             document.body.classList.toggle('blue-theme');
             const isBlue = document.body.classList.contains('blue-theme');
             localStorage.setItem('theme', isBlue ? 'blue' : 'red');
-            updateSakuraColor();
         }
         if (localStorage.getItem('theme') === 'blue') {
             document.body.classList.add('blue-theme');
@@ -678,15 +674,29 @@
         }
         animateSakura();
 
-        // Mascot Interactive & Games
-        function toggleMascotMenu() {
+        // --- Mascot Interactive & Games Logic ---
+        const quotes = [
+            "ถ้าไม่สู้... ก็ไม่มีวันชนะ! ⚔️",
+            "ยินดีที่ได้คุยกันนะ! ตั้งใจเรียนและเล่นเกมให้สนุกนะ ✨",
+            "ฉันจะคอยเฝ้าดูความสำเร็จของคุณเองค่ะ!",
+            "วันนี้อากาศดีนะ อย่าลืมดูแลตัวเองด้วยล่ะ",
+            "พยายามเข้าล่ะ! ฉันเชื่อว่าคุณทำได้แน่นอน 🔥",
+            "หิวหรือยัง? อย่าลืมหาอะไรอร่อยๆ ทานด้วยนะ"
+        ];
+
+        function onMascotClick() {
+            // เปิด/ปิด เมนู
             const menu = document.getElementById('mascotMenu');
             menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+
+            // สุ่มคำพูด
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('mascotText').innerText = randomQuote;
         }
 
         function drawFortune() {
             const fortunes = [
-                "🔮 ดวงวันนี้: โชคดีขั้นสุด! เล่นเกมชนะรวดแน่นอน!",
+                "🔮 ดวงวันนี้: โชคดีขั้นสุด! เล่นเกม Roblox ชนะแน่นอน!",
                 "🔮 ดวงวันนี้: ราบรื่นดี การเรียนปัง ไร้ปัญหา!",
                 "🔮 ดวงวันนี้: พักผ่อนเยอะๆ แล้วความสุขจะมาเยือน!",
                 "🔮 ดวงวันนี้: มีเกณฑ์จะได้กินของอร่อยเร็วๆ นี้!"
