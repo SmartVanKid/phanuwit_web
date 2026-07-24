@@ -404,9 +404,9 @@
     
     <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
 
-    <!-- มิคาสะ Mascot มุมขวาล่าง -->
-    <div class="anime-mascot-container">
-        <div class="speech-bubble" id="mascotText">ยินดีต้อนรับสู่เว็บของฉันนะ! ✨</div>
+    <!-- มิคาสะ Mascot มุมขวาล่าง (คลิกรูปเพื่อเปลี่ยนคำพูดได้) -->
+    <div class="anime-mascot-container" onclick="changeMikasaSpeech()">
+        <div class="speech-bubble" id="mascotText">ยินดีต้อนรับสู่เว็บของภานุวิชญ์ค่ะ! ❤️</div>
         <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img">
     </div>
 
@@ -524,6 +524,21 @@
     </div>
 
     <script>
+        // Mikasa Speech Quotes Function
+        const mikasaQuotes = [
+            "ถ้าไม่สู้... ก็ไม่มีวันชนะ! 🔥",
+            "ฉันจะปกป้องเอเรน... และนายด้วย! ⚔️",
+            "โลกนี้น่ะ... ช่างโหดร้าย แต่มันก็สวยงาม ✨",
+            "ยินดีต้อนรับสู่เว็บของภานุวิชญ์ค่ะ! ❤️",
+            "ถ้ายังมีชีวิตอยู่... ก็ทำได้ทุกอย่าง!"
+        ];
+
+        function changeMikasaSpeech() {
+            const mascotText = document.getElementById('mascotText');
+            const randomQuote = mikasaQuotes[Math.floor(Math.random() * mikasaQuotes.length)];
+            mascotText.innerText = randomQuote;
+        }
+
         // Glow Effect
         const glow = document.getElementById('cursorGlow');
         window.addEventListener('mousemove', (e) => {
