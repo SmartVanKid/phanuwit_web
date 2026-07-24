@@ -3,20 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ตารางกิจวัตรประจำวัน - Anime Red Neon Style</title>
+    <title>ตารางกิจวัตรประจำวัน - Anime Neon Style</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Mitr:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --primary-color: #ff1e43;
+            --primary-glow: #ff002b;
+            --primary-light: #ff8093;
+            --bg-color: #0d0203;
+            --card-bg: rgba(20, 5, 7, 0.88);
+            --manga-bg: rgba(35, 8, 12, 0.75);
+        }
+
+        body.blue-theme {
+            --primary-color: #00d2ff;
+            --primary-glow: #00aaff;
+            --primary-light: #80e5ff;
+            --bg-color: #020b14;
+            --card-bg: rgba(5, 15, 28, 0.88);
+            --manga-bg: rgba(8, 25, 45, 0.75);
+        }
+
         body {
-            background-color: #0d0203;
+            background-color: var(--bg-color);
             color: #ffffff;
             font-family: 'Kanit', sans-serif;
             margin: 0;
             padding: 20px;
             overflow-x: hidden;
             position: relative;
+            transition: background-color 0.5s ease;
         }
 
         #sakura-canvas {
@@ -32,41 +51,70 @@
         .cursor-glow {
             width: 25px;
             height: 25px;
-            background: rgba(255, 30, 67, 0.6);
+            background: var(--primary-color);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
-            box-shadow: 0 0 15px #ff1e43, 0 0 30px #ff1e43;
+            box-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color);
             transform: translate(-50%, -50%);
             transition: transform 0.08s ease-out;
             z-index: 9999;
+            opacity: 0.6;
+        }
+
+        .top-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background: rgba(30, 5, 10, 0.9);
+            border: 2px solid var(--primary-color);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Mitr', sans-serif;
+            font-size: 0.85rem;
+            box-shadow: 0 0 15px var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px var(--primary-color);
         }
 
         .container {
             max-width: 850px;
             margin: 0 auto;
-            background: rgba(20, 5, 7, 0.88);
-            border: 2px solid #ff1e43;
-            box-shadow: 0 0 25px rgba(255, 30, 67, 0.35);
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 25px var(--primary-color);
             border-radius: 15px;
             padding: 30px;
             backdrop-filter: blur(8px);
             position: relative;
             z-index: 2;
+            transition: all 0.5s ease;
         }
 
         .navbar {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
         .nav-btn {
             background: rgba(40, 10, 15, 0.8);
-            color: #ff8093;
-            border: 1px solid #ff1e43;
+            color: var(--primary-light);
+            border: 1px solid var(--primary-color);
             padding: 8px 18px;
             border-radius: 20px;
             text-decoration: none;
@@ -76,86 +124,118 @@
         }
 
         .nav-btn:hover {
-            background: #ff1e43;
+            background: var(--primary-color);
             color: #ffffff;
-            box-shadow: 0 0 12px rgba(255, 30, 67, 0.8);
+            box-shadow: 0 0 12px var(--primary-color);
             transform: translateY(-2px);
         }
 
         .nav-btn.active {
-            background: linear-gradient(45deg, #b3001b, #ff1e43);
+            background: var(--primary-color);
             color: #ffffff;
-            box-shadow: 0 0 15px rgba(255, 30, 67, 0.8);
+            box-shadow: 0 0 15px var(--primary-color);
+            font-weight: bold;
+        }
+
+        .top-widget-bar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(40, 10, 15, 0.7);
+            border: 1px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .widget-item {
+            font-size: 0.95rem;
+            color: var(--primary-light);
+        }
+
+        .widget-value {
+            color: #ffffff;
             font-weight: bold;
         }
 
         h1 {
             font-family: 'Mitr', sans-serif;
-            color: #ff2a4b;
+            color: var(--primary-color);
             text-align: center;
-            font-size: 2.2rem;
-            text-shadow: 0 0 10px #ff002b, 0 0 20px #ff002b;
+            font-size: 2.1rem;
+            text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow);
             letter-spacing: 2px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         hr {
             border: none;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #ff1e43, transparent);
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
             margin: 25px 0;
         }
 
-        /* Table Styling */
-        .table-responsive {
-            overflow-x: auto;
-            margin-top: 15px;
+        .manga-card {
+            background: var(--manga-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            position: relative;
+            box-shadow: 4px 4px 0px var(--primary-color), 0 0 12px rgba(255, 30, 67, 0.25);
+            transition: all 0.3s ease;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: rgba(30, 6, 10, 0.85);
-            border: 2px solid #ff1e43;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(255, 30, 67, 0.3);
+        .manga-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 7px 7px 0px var(--primary-color), 0 0 20px var(--primary-color);
         }
 
-        th, td {
-            padding: 14px 18px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 30, 67, 0.25);
-            font-size: 1rem;
-        }
-
-        th {
-            background: linear-gradient(45deg, #800013, #b3001b);
+        .manga-tag {
+            position: absolute;
+            top: -11px;
+            left: 15px;
+            background: var(--primary-color);
             color: #ffffff;
-            font-family: 'Mitr', sans-serif;
-            font-size: 1.05rem;
-            letter-spacing: 1px;
-            text-shadow: 0 0 5px #000;
-        }
-
-        tr:hover {
-            background: rgba(255, 30, 67, 0.15);
-            transition: background 0.3s ease;
-        }
-
-        td.time-col {
-            color: #ff8093;
+            font-size: 0.75rem;
             font-weight: bold;
-            border-right: 1px solid rgba(255, 30, 67, 0.25);
+            padding: 2px 8px;
+            border-radius: 4px;
+            letter-spacing: 1px;
         }
 
-        td.activity-col {
+        h2 {
+            font-size: 1.15rem;
+            color: var(--primary-light);
+            margin: 4px 0 2px 0;
+        }
+
+        p {
+            font-size: 1.1rem;
             color: #ffffff;
-            text-align: left;
-            padding-left: 25px;
+            margin: 0;
         }
 
-        /* Mikasa Mascot */
+        ul.schedule-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        ul.schedule-list li {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 3px solid var(--primary-color);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 1.05rem;
+        }
+
+        /* --- Mikasa Mascot --- */
         .anime-mascot-container {
             position: fixed;
             bottom: 15px;
@@ -170,16 +250,32 @@
 
         .speech-bubble {
             background: rgba(25, 5, 8, 0.95);
-            border: 2px solid #ff1e43;
+            border: 2px solid var(--primary-color);
             color: #ffffff;
             padding: 8px 14px;
             border-radius: 12px 12px 2px 12px;
             font-size: 0.88rem;
-            box-shadow: 0 0 15px rgba(255, 30, 67, 0.6);
+            box-shadow: 0 0 15px var(--primary-color);
             margin-bottom: 6px;
             white-space: nowrap;
             transition: transform 0.2s ease;
             animation: floatBubble 2.5s infinite alternate ease-in-out;
+        }
+
+        .mascot-menu {
+            display: none;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .mascot-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
         }
 
         .mascot-img {
@@ -187,8 +283,8 @@
             height: 110px;
             object-fit: cover;
             border-radius: 50%;
-            border: 2px solid #ff1e43;
-            box-shadow: 0 0 15px #ff1e43;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 15px var(--primary-color);
             transition: transform 0.3s ease;
             animation: floatMascot 3s infinite ease-in-out;
         }
@@ -213,9 +309,23 @@
     <canvas id="sakura-canvas"></canvas>
     <div class="cursor-glow" id="cursorGlow"></div>
 
-    <div class="anime-mascot-container" onclick="talkMascot()">
-        <div class="speech-bubble" id="mascotText">อย่าลืมพักผ่อนให้เพียงพอนะคะ! ✨</div>
-        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img">
+    <div class="top-controls">
+        <button class="control-btn" onclick="toggleTheme()">🎨 สลับสีธีม</button>
+        <button class="control-btn" id="bgmBtn" onclick="toggleBGM()">🎵 BGM: ปิดอยู่</button>
+    </div>
+    
+    <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
+
+    <!-- มิคาสะ Mascot -->
+    <div class="anime-mascot-container">
+        <div class="speech-bubble" id="mascotText">คลิกตัวฉันเพื่อคุย / เล่นสุ่มดวง และเป่ายิ้งฉุบได้นะ! ✨</div>
+        <div class="mascot-menu" id="mascotMenu">
+            <button class="mascot-btn" onclick="drawFortune()">🔮 สุ่มดวงวันนี้</button>
+            <button class="mascot-btn" onclick="playRPS('ค้อน')">✊ ค้อน</button>
+            <button class="mascot-btn" onclick="playRPS('กรรไกร')">✌️ กรรไกร</button>
+            <button class="mascot-btn" onclick="playRPS('กระดาษ')">✋ กระดาษ</button>
+        </div>
+        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img" onclick="onMascotClick()">
     </div>
 
     <div class="container">
@@ -225,58 +335,98 @@
             <a href="page3.html" class="nav-btn active">หน้า 3 (ตารางกิจวัตรประจำวัน)</a>
         </div>
 
+        <div class="top-widget-bar">
+            <div class="widget-item">
+                ⛅ เชียงใหม่: <span class="widget-value" id="weather">กำลังโหลด...</span>
+            </div>
+            <div class="widget-item">
+                ⏰ เวลา: <span class="widget-value" id="clock">00:00:00</span>
+            </div>
+            <div class="widget-item">
+                👀 เข้าชม: <span class="widget-value" id="visitor-count">1,245</span> คน
+            </div>
+        </div>
+
         <h1>📅 ตารางกิจวัตรประจำวัน</h1>
         
         <hr>
 
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 30%;">⏰ ช่วงเวลา</th>
-                        <th style="width: 70%;">📝 กิจกรรมที่ทำ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="time-col">06:00 - 07:00 น.</td>
-                        <td class="activity-col">ตื่นนอน, อาบน้ำ แต่งตัว เตรียมตัวไปวิทยาลัย 🎒</td>
-                    </tr>
-                    <tr>
-                        <td class="time-col">08:00 - 15:00 น.</td>
-                        <td class="activity-col">เข้าชั้นเรียนตามตารางเรียน วิทยาลัยเทคนิคเชียงใหม่ 🏫</td>
-                    </tr>
-                    <tr>
-                        <td class="time-col">15:00 - 17:00 น.</td>
-                        <td class="activity-col">เดินทางกลับบ้าน, พักผ่อน หาของอร่อยกิน 🍜</td>
-                    </tr>
-                    <tr>
-                        <td class="time-col">17:00 - 20:00 น.</td>
-                        <td class="activity-col">ทำการบ้าน, ทบทวนบทเรียน หรือฝึกทักษะคอมพิวเตอร์ 💻</td>
-                    </tr>
-                    <tr>
-                        <td class="time-col">20:00 - 23:00 น.</td>
-                        <td class="activity-col">เล่นเกม, ดู YouTube, ฟังเพลง ผ่อนคลายความเครียด 🎮🎧</td>
-                    </tr>
-                    <tr>
-                        <td class="time-col">23:00 - 06:00 น.</td>
-                        <td class="activity-col">เข้านอน ชาร์จพลังสำหรับวันใหม่ 😴💤</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="manga-card">
+            <div class="manga-tag">ROUTINE</div>
+            <h2>ตารางประจำวัน</h2>
+            <ul class="schedule-list">
+                <li>🌅 <strong>07:00 - 08:00 น. :</strong> ตื่นนอน เตรีมตัวเดินทางไปวิทยาลัยเทคนิคเชียงใหม่</li>
+                <li>💻 <strong>08:00 - 15:30 น. :</strong> เรียนหนังสือ ทำแล็ปอิเล็กทรอนิกส์ & ฟิสิกส์</li>
+                <li>🎮 <strong>16:00 - 18:00 น. :</strong> พักผ่อน เล่นเกม Roblox และพูดคุยกับเพื่อนๆ</li>
+                <li>⚡ <strong>19:00 - 21:00 น. :</strong> ทำการบ้าน ทบทวนบทเรียน และศึกษาเขียนโค้ดเพิ่มเติม</li>
+                <li>🌙 <strong>22:00 น. เป็นต้นไป :</strong> ฟังเพลง พักผ่อน เตรียมตัวเข้านอน</li>
+            </ul>
+        </div>
+
+        <div class="manga-card">
+            <div class="manga-tag">CONTACT</div>
+            <h2>ช่องทางการติดต่อเพิ่มเติม</h2>
+            <p>📧 Email: contact@example.com</p>
+            <p>💬 Line: @neonstyle</p>
         </div>
     </div>
 
     <script>
+        // Glow Effect
         const glow = document.getElementById('cursorGlow');
         window.addEventListener('mousemove', (e) => {
             glow.style.left = e.clientX + 'px';
             glow.style.top = e.clientY + 'px';
         });
 
+        // Theme Switcher
+        function toggleTheme() {
+            document.body.classList.toggle('blue-theme');
+            const isBlue = document.body.classList.contains('blue-theme');
+            localStorage.setItem('theme', isBlue ? 'blue' : 'red');
+        }
+        if (localStorage.getItem('theme') === 'blue') {
+            document.body.classList.add('blue-theme');
+        }
+
+        // Clock & Weather & Visitor
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString('th-TH');
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        async function fetchWeather() {
+            try {
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=18.7904&longitude=98.9847&current_weather=true');
+                const data = await res.json();
+                document.getElementById('weather').innerText = `${Math.round(data.current_weather.temperature)}°C`;
+            } catch (e) {
+                document.getElementById('weather').innerText = '28°C';
+            }
+        }
+        fetchWeather();
+
+        let visits = localStorage.getItem('site_visits') || 100;
+        document.getElementById('visitor-count').innerText = visits;
+
+        // BGM
+        const bgmAudio = document.getElementById('bgmAudio');
+        const bgmBtn = document.getElementById('bgmBtn');
+        function toggleBGM() {
+            if (bgmAudio.paused) {
+                bgmAudio.play();
+                bgmBtn.innerText = "🔊 BGM: เล่นอยู่";
+            } else {
+                bgmAudio.pause();
+                bgmBtn.innerText = "🎵 BGM: ปิดอยู่";
+            }
+        }
+
+        // Sakura Effect
         const sakuraCanvas = document.getElementById('sakura-canvas');
         const sCtx = sakuraCanvas.getContext('2d');
-
         function resizeSakura() {
             sakuraCanvas.width = window.innerWidth;
             sakuraCanvas.height = window.innerHeight;
@@ -294,12 +444,12 @@
                 speedX: Math.random() * 1 - 0.5,
                 angle: Math.random() * 360,
                 spin: Math.random() * 0.04 - 0.02,
-                color: Math.random() > 0.35 ? '#ff1e43' : '#ff8093'
             });
         }
 
         function animateSakura() {
             sCtx.clearRect(0, 0, sakuraCanvas.width, sakuraCanvas.height);
+            const isBlue = document.body.classList.contains('blue-theme');
             petals.forEach(p => {
                 p.y += p.speedY;
                 p.x += Math.sin(p.angle) * 0.7;
@@ -315,10 +465,10 @@
                 sCtx.rotate(p.angle);
                 sCtx.beginPath();
                 sCtx.ellipse(0, 0, p.size, p.size / 2, 0, 0, Math.PI * 2);
-                sCtx.fillStyle = p.color;
+                sCtx.fillStyle = isBlue ? '#00d2ff' : '#ff1e43';
                 sCtx.globalAlpha = 0.75;
                 sCtx.shadowBlur = 8;
-                sCtx.shadowColor = p.color;
+                sCtx.shadowColor = sCtx.fillStyle;
                 sCtx.fill();
                 sCtx.restore();
             });
@@ -326,22 +476,49 @@
         }
         animateSakura();
 
+        // --- Mascot Interactive & Games Logic ---
         const quotes = [
-            "อย่าลืมพักผ่อนให้เพียงพอนะคะ! ✨",
-            "ตารางเวลามีระเบียบมากเลยค่ะ! 👏",
-            "ช่วง 20:00 น. เล่นเกมอะไรอยู่เหรอคะ? 🎮",
-            "พรุ่งนี้ก็พยายามเข้าล่ะ! ⚔️"
+            "ถ้าไม่สู้... ก็ไม่มีวันชนะ! ⚔️",
+            "ยินดีที่ได้คุยกันนะ! ตั้งใจเรียนและเล่นเกมให้สนุกนะ ✨",
+            "ฉันจะคอยเฝ้าดูความสำเร็จของคุณเองค่ะ!",
+            "วันนี้อากาศดีนะ อย่าลืมดูแลตัวเองด้วยล่ะ",
+            "พยายามเข้าล่ะ! ฉันเชื่อว่าคุณทำได้แน่นอน 🔥",
+            "หิวหรือยัง? อย่าลืมหาอะไรอร่อยๆ ทานด้วยนะ"
         ];
 
-        function talkMascot() {
-            const bubble = document.getElementById('mascotText');
-            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-            bubble.innerText = randomQuote;
+        function onMascotClick() {
+            const menu = document.getElementById('mascotMenu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
 
-            bubble.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                bubble.style.transform = 'scale(1)';
-            }, 200);
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('mascotText').innerText = randomQuote;
+        }
+
+        function drawFortune() {
+            const fortunes = [
+                "🔮 ดวงวันนี้: โชคดีขั้นสุด! เล่นเกม Roblox ชนะแน่นอน!",
+                "🔮 ดวงวันนี้: ราบรื่นดี การเรียนปัง ไร้ปัญหา!",
+                "🔮 ดวงวันนี้: พักผ่อนเยอะๆ แล้วความสุขจะมาเยือน!",
+                "🔮 ดวงวันนี้: มีเกณฑ์จะได้กินของอร่อยเร็วๆ นี้!"
+            ];
+            const result = fortunes[Math.floor(Math.random() * fortunes.length)];
+            document.getElementById('mascotText').innerText = result;
+        }
+
+        function playRPS(userChoice) {
+            const choices = ['ค้อน', 'กรรไกร', 'กระดาษ'];
+            const botChoice = choices[Math.floor(Math.random() * choices.length)];
+            let result = `ฉันออก ${botChoice}! `;
+
+            if (userChoice === botChoice) result += "เสมอเลยนะ! 🤝";
+            else if (
+                (userChoice === 'ค้อน' && botChoice === 'กรรไกร') ||
+                (userChoice === 'กรรไกร' && botChoice === 'กระดาษ') ||
+                (userChoice === 'กระดาษ' && botChoice === 'ค้อน')
+            ) result += "คุณชนะแล้ว... เก่งจัง! 🎉";
+            else result += "ฉันชนะล่ะ! ลองใหม่อีกทีนะ ⚔️";
+
+            document.getElementById('mascotText').innerText = result;
         }
     </script>
 </body>
