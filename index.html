@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แนะนำตัวเอง - Anime Neon Style</title>
+    <title>ทักษะและอาชีพ - Anime Neon Style</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Mitr:wght@400;600&display=swap" rel="stylesheet">
@@ -164,11 +164,10 @@
             font-family: 'Mitr', sans-serif;
             color: var(--primary-color);
             text-align: center;
-            font-size: 2.3rem;
+            font-size: 2.1rem;
             text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow);
             letter-spacing: 2px;
             margin-bottom: 20px;
-            min-height: 55px;
         }
 
         hr {
@@ -219,121 +218,33 @@
             margin: 0;
         }
 
-        a.fb-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        a.fb-link:hover {
-            color: #ffffff;
-            text-shadow: 0 0 10px var(--primary-color);
-        }
-
-        .favorite-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        .skill-container {
+            display: flex;
+            flex-direction: column;
             gap: 15px;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
-        .fav-item {
-            background: rgba(10, 5, 15, 0.6);
+        .skill-item-title {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .progress-bg {
+            background: rgba(0, 0, 0, 0.6);
             border: 1px solid var(--primary-color);
             border-radius: 10px;
-            padding: 12px;
-            text-align: center;
+            height: 14px;
+            overflow: hidden;
         }
 
-        .fav-item h3 {
-            margin: 5px 0;
-            color: var(--primary-light);
-            font-size: 1rem;
-        }
-
-        .stars {
-            color: #ffd700;
-            font-size: 0.9rem;
-        }
-
-        .guestbook-box {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .guestbook-input {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid var(--primary-color);
-            color: #fff;
-            padding: 10px;
-            border-radius: 8px;
-            font-family: 'Kanit', sans-serif;
-        }
-
-        .guestbook-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Mitr', sans-serif;
-            font-weight: bold;
-        }
-
-        .comments-list {
-            max-height: 150px;
-            overflow-y: auto;
-            margin-top: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .comment-item {
-            background: rgba(255,255,255,0.05);
-            padding: 8px 12px;
-            border-radius: 6px;
-            border-left: 3px solid var(--primary-color);
-            font-size: 0.95rem;
-        }
-
-        .image-gallery {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-
-        .image-gallery img {
-            width: 180px;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 15px;
-            border: 2px solid var(--primary-color);
-            box-shadow: 0 0 15px var(--primary-color);
-            transition: all 0.3s ease;
-        }
-
-        .image-gallery img:hover {
-            transform: scale(1.1) rotate(3deg);
-            border-color: #ffffff;
-        }
-
-        .video-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 15px;
-        }
-
-        .video-container iframe {
-            border-radius: 12px;
-            border: 2px solid var(--primary-color);
-            box-shadow: 0 0 20px var(--primary-color);
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            height: 100%;
+            box-shadow: 0 0 10px var(--primary-glow);
         }
 
         /* --- Mikasa Mascot --- */
@@ -361,22 +272,6 @@
             white-space: nowrap;
             transition: transform 0.2s ease;
             animation: floatBubble 2.5s infinite alternate ease-in-out;
-        }
-
-        .mascot-menu {
-            display: none;
-            gap: 5px;
-            margin-bottom: 5px;
-        }
-
-        .mascot-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            cursor: pointer;
         }
 
         .mascot-img {
@@ -417,22 +312,15 @@
     
     <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
 
-    <!-- มิคาสะ Mascot มุมขวาล่าง + Mini Game + สุ่มคำพูดเมื่อกดตัว -->
-    <div class="anime-mascot-container">
-        <div class="speech-bubble" id="mascotText">คลิกตัวฉันเพื่อคุย / เล่นสุ่มดวง และเป่ายิ้งฉุบได้นะ! ✨</div>
-        <div class="mascot-menu" id="mascotMenu">
-            <button class="mascot-btn" onclick="drawFortune()">🔮 สุ่มดวงวันนี้</button>
-            <button class="mascot-btn" onclick="playRPS('ค้อน')">✊ ค้อน</button>
-            <button class="mascot-btn" onclick="playRPS('กรรไกร')">✌️ กรรไกร</button>
-            <button class="mascot-btn" onclick="playRPS('กระดาษ')">✋ กระดาษ</button>
-        </div>
-        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img" onclick="onMascotClick()">
+    <div class="anime-mascot-container" onclick="onMascotClick()">
+        <div class="speech-bubble" id="mascotText">ถ้าไม่สู้... ก็ไม่มีวันชนะ! ⚔️</div>
+        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img">
     </div>
 
     <div class="container">
         <div class="navbar">
-            <a href="index.html" class="nav-btn active">หน้าแรก (แนะนำตัว)</a>
-            <a href="page2.html" class="nav-btn">หน้า 2 (ทักษะและอาชีพ)</a>
+            <a href="index.html" class="nav-btn">หน้าแรก (แนะนำตัว)</a>
+            <a href="page2.html" class="nav-btn active">หน้า 2 (ทักษะและอาชีพ)</a>
             <a href="page3.html" class="nav-btn">หน้า 3 (ตารางกิจวัตรประจำวัน)</a>
         </div>
 
@@ -448,109 +336,52 @@
             </div>
         </div>
 
-        <h1 id="typingName"></h1>
+        <h1>🛠️ ทักษะและความชำนาญ (Skills)</h1>
         
         <hr>
 
         <div class="manga-card">
-            <div class="manga-tag">PROFILE</div>
-            <h2>วันเกิด</h2>
-            <p>30/03/2553</p>
-        </div>
-
-        <div class="manga-card">
-            <div class="manga-tag">AGE</div>
-            <h2>อายุ</h2>
-            <p>16 ปี</p>
-        </div>
-
-        <div class="manga-card">
-            <div class="manga-tag">ACADEMY</div>
-            <h2>สถานศึกษาปัจจุบัน</h2>
-            <p>วิทยาลัยเทคนิคเชียงใหม่</p>
-        </div>
-
-        <div class="manga-card">
-            <div class="manga-tag">HOBBIES</div>
-            <h2>สิ่งที่ชอบ</h2>
-            <p>นอน / เกม / ดูยูทูป</p>
-        </div>
-
-        <div class="manga-card">
-            <div class="manga-tag">SOCIAL</div>
-            <h2>ลิงก์เฟสของฉัน</h2>
-            <p>
-                <a class="fb-link" href="https://www.facebook.com/pha.nu.wichy.suwrrn.ratn?locale=th_TH" target="_blank">
-                    Facebook Profile ➔
-                </a>
-            </p>
-        </div>
-
-        <!-- โซนเกมและอนิเมะเรื่องโปรด (เปลี่ยน Genshin Impact เป็น Roblox ตามสั่ง) -->
-        <div class="manga-card">
-            <div class="manga-tag">FAVORITES</div>
-            <h2>🎮 เกม & อนิเมะเรื่องโปรด</h2>
-            <div class="favorite-grid">
-                <div class="fav-item">
-                    <h3>Attack on Titan</h3>
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
+            <div class="manga-tag">SKILLS</div>
+            <h2>ระดับความสามารถ</h2>
+            <div class="skill-container">
+                <div>
+                    <div class="skill-item-title">
+                        <span>การเรียนและการรับรู้เร็ว</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 85%;"></div></div>
                 </div>
-                <div class="fav-item">
-                    <h3>Roblox</h3>
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                <div>
+                    <div class="skill-item-title">
+                        <span>การทำงานเป็นทีม</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 80%;"></div></div>
                 </div>
-                <div class="fav-item">
-                    <h3>Valorant</h3>
-                    <div class="stars">⭐⭐⭐⭐☆</div>
+                <div>
+                    <div class="skill-item-title">
+                        <span>การแก้ไขปัญหา</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 75%;"></div></div>
                 </div>
             </div>
         </div>
 
-        <!-- สมุดเยี่ยมฝากข้อความ -->
         <div class="manga-card">
-            <div class="manga-tag">GUESTBOOK</div>
-            <h2>💬 สมุดเยี่ยม (ฝากข้อความไว้ได้นะ)</h2>
-            <div class="guestbook-box">
-                <input type="text" id="guestInput" class="guestbook-input" placeholder="พิมพ์ข้อความทักทายตรงนี้..." maxLength="60">
-                <button class="guestbook-btn" onclick="addComment()">ส่งข้อความ ✨</button>
-            </div>
-            <div class="comments-list" id="commentsList">
-                <div class="comment-item">ยินดีต้อนรับสู่เว็บไซต์ของผมครับ! 👋</div>
-            </div>
-        </div>
-
-        <hr>
-
-        <h2 style="text-align: center; color: var(--primary-color); font-size: 1.5rem;">
-            📷 Gallery
-        </h2>
-        <div class="image-gallery">
-            <img src="018.jpg" alt="รูปของฉัน 1">
-            <img src="67.jpg" alt="รูปของฉัน 2">
-        </div>
-
-        <hr>
-
-        <div class="video-container">
-            <iframe width="315" height="560" 
-                    src="https://www.youtube.com/embed/Hs3SSMrR55k" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen>
-            </iframe>
+            <div class="manga-tag">FUTURE CAREER</div>
+            <h2>อาชีพที่ใฝ่ฝันในอนาคต</h2>
+            <p>วิศวกร / นักพัฒนาซอฟต์แวร์ / ผู้เชี่ยวชาญด้านเทคโนโลยี</p>
         </div>
     </div>
 
     <script>
-        // Glow Effect
         const glow = document.getElementById('cursorGlow');
         window.addEventListener('mousemove', (e) => {
             glow.style.left = e.clientX + 'px';
             glow.style.top = e.clientY + 'px';
         });
 
-        // Theme Switcher
         function toggleTheme() {
             document.body.classList.toggle('blue-theme');
             const isBlue = document.body.classList.contains('blue-theme');
@@ -560,19 +391,6 @@
             document.body.classList.add('blue-theme');
         }
 
-        // Typing Text
-        const text = "นายภานุวิชญ์ สุวรรณรัตน์";
-        let index = 0;
-        function typeWriter() {
-            if (index < text.length) {
-                document.getElementById("typingName").innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeWriter, 120);
-            }
-        }
-        typeWriter();
-
-        // Clock & Weather & Visitor
         function updateClock() {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString('th-TH');
@@ -592,11 +410,8 @@
         fetchWeather();
 
         let visits = localStorage.getItem('site_visits') || 100;
-        visits++;
-        localStorage.setItem('site_visits', visits);
         document.getElementById('visitor-count').innerText = visits;
 
-        // BGM
         const bgmAudio = document.getElementById('bgmAudio');
         const bgmBtn = document.getElementById('bgmBtn');
         function toggleBGM() {
@@ -609,20 +424,6 @@
             }
         }
 
-        // Guestbook
-        function addComment() {
-            const input = document.getElementById('guestInput');
-            const list = document.getElementById('commentsList');
-            if(input.value.trim() !== '') {
-                const item = document.createElement('div');
-                item.className = 'comment-item';
-                item.innerText = input.value;
-                list.prepend(item);
-                input.value = '';
-            }
-        }
-
-        // Sakura Effect
         const sakuraCanvas = document.getElementById('sakura-canvas');
         const sCtx = sakuraCanvas.getContext('2d');
         function resizeSakura() {
@@ -674,7 +475,6 @@
         }
         animateSakura();
 
-        // --- Mascot Interactive & Games Logic ---
         const quotes = [
             "ถ้าไม่สู้... ก็ไม่มีวันชนะ! ⚔️",
             "ยินดีที่ได้คุยกันนะ! ตั้งใจเรียนและเล่นเกมให้สนุกนะ ✨",
@@ -685,40 +485,8 @@
         ];
 
         function onMascotClick() {
-            // เปิด/ปิด เมนู
-            const menu = document.getElementById('mascotMenu');
-            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-
-            // สุ่มคำพูด
             const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
             document.getElementById('mascotText').innerText = randomQuote;
-        }
-
-        function drawFortune() {
-            const fortunes = [
-                "🔮 ดวงวันนี้: โชคดีขั้นสุด! เล่นเกม Roblox ชนะแน่นอน!",
-                "🔮 ดวงวันนี้: ราบรื่นดี การเรียนปัง ไร้ปัญหา!",
-                "🔮 ดวงวันนี้: พักผ่อนเยอะๆ แล้วความสุขจะมาเยือน!",
-                "🔮 ดวงวันนี้: มีเกณฑ์จะได้กินของอร่อยเร็วๆ นี้!"
-            ];
-            const result = fortunes[Math.floor(Math.random() * fortunes.length)];
-            document.getElementById('mascotText').innerText = result;
-        }
-
-        function playRPS(userChoice) {
-            const choices = ['ค้อน', 'กรรไกร', 'กระดาษ'];
-            const botChoice = choices[Math.floor(Math.random() * choices.length)];
-            let result = `ฉันออก ${botChoice}! `;
-
-            if (userChoice === botChoice) result += "เสมอเลยนะ! 🤝";
-            else if (
-                (userChoice === 'ค้อน' && botChoice === 'กรรไกร') ||
-                (userChoice === 'กรรไกร' && botChoice === 'กระดาษ') ||
-                (userChoice === 'กระดาษ' && botChoice === 'ค้อน')
-            ) result += "คุณชนะแล้ว... เก่งจัง! 🎉";
-            else result += "ฉันชนะล่ะ! ลองใหม่อีกทีนะ ⚔️";
-
-            document.getElementById('mascotText').innerText = result;
         }
     </script>
 </body>
