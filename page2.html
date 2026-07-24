@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ทักษะและอาชีพ - Anime Neon Style</title>
+    <title>ตารางกิจวัตรประจำวัน - Anime Neon Style</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Mitr:wght@400;600&display=swap" rel="stylesheet">
@@ -218,34 +218,21 @@
             margin: 0;
         }
 
-        /* Skill Bar System */
-        .skill-container {
+        ul.schedule-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-top: 10px;
+            gap: 10px;
         }
 
-        .skill-item-title {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1rem;
-            color: #fff;
-            margin-bottom: 5px;
-        }
-
-        .progress-bg {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--primary-color);
-            border-radius: 10px;
-            height: 14px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
-            height: 100%;
-            box-shadow: 0 0 10px var(--primary-glow);
+        ul.schedule-list li {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 3px solid var(--primary-color);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 1.05rem;
         }
 
         /* --- Mikasa Mascot --- */
@@ -273,22 +260,6 @@
             white-space: nowrap;
             transition: transform 0.2s ease;
             animation: floatBubble 2.5s infinite alternate ease-in-out;
-        }
-
-        .mascot-menu {
-            display: none;
-            gap: 5px;
-            margin-bottom: 5px;
-        }
-
-        .mascot-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            cursor: pointer;
         }
 
         .mascot-img {
@@ -329,23 +300,16 @@
     
     <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
 
-    <!-- มิคาสะ Mascot -->
-    <div class="anime-mascot-container">
-        <div class="speech-bubble" id="mascotText">คลิกตัวฉันเพื่อคุย / เล่นสุ่มดวง และเป่ายิ้งฉุบได้นะ! ✨</div>
-        <div class="mascot-menu" id="mascotMenu">
-            <button class="mascot-btn" onclick="drawFortune()">🔮 สุ่มดวงวันนี้</button>
-            <button class="mascot-btn" onclick="playRPS('ค้อน')">✊ ค้อน</button>
-            <button class="mascot-btn" onclick="playRPS('กรรไกร')">✌️ กรรไกร</button>
-            <button class="mascot-btn" onclick="playRPS('กระดาษ')">✋ กระดาษ</button>
-        </div>
-        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img" onclick="onMascotClick()">
+    <div class="anime-mascot-container" onclick="onMascotClick()">
+        <div class="speech-bubble" id="mascotText">ถ้าไม่สู้... ก็ไม่มีวันชนะ! ⚔️</div>
+        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img">
     </div>
 
     <div class="container">
         <div class="navbar">
             <a href="index.html" class="nav-btn">หน้าแรก (แนะนำตัว)</a>
-            <a href="page2.html" class="nav-btn active">หน้า 2 (ทักษะและอาชีพ)</a>
-            <a href="page3.html" class="nav-btn">หน้า 3 (ตารางกิจวัตรประจำวัน)</a>
+            <a href="page2.html" class="nav-btn">หน้า 2 (ทักษะและอาชีพ)</a>
+            <a href="page3.html" class="nav-btn active">หน้า 3 (ตารางกิจวัตรประจำวัน)</a>
         </div>
 
         <div class="top-widget-bar">
@@ -360,60 +324,30 @@
             </div>
         </div>
 
-        <h1>🛠️ ทักษะและความชำนาญ (Skills)</h1>
+        <h1>📅 ตารางกิจวัตรประจำวัน</h1>
         
         <hr>
 
         <div class="manga-card">
-            <div class="manga-tag">SKILLS</div>
-            <h2>ระดับความสามารถ</h2>
-            <div class="skill-container">
-                <div>
-                    <div class="skill-item-title">
-                        <span>Web Development (HTML/CSS/JS)</span>
-                        <span>80%</span>
-                    </div>
-                    <div class="progress-bg"><div class="progress-fill" style="width: 80%;"></div></div>
-                </div>
-                <div>
-                    <div class="skill-item-title">
-                        <span>Roblox Gameplay & Studio</span>
-                        <span>90%</span>
-                    </div>
-                    <div class="progress-bg"><div class="progress-fill" style="width: 90%;"></div></div>
-                </div>
-                <div>
-                    <div class="skill-item-title">
-                        <span>Electronics & Hardware</span>
-                        <span>75%</span>
-                    </div>
-                    <div class="progress-bg"><div class="progress-fill" style="width: 75%;"></div></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="manga-card">
-            <div class="manga-tag">FUTURE CAREER</div>
-            <h2>อาชีพที่ใฝ่ฝันในอนาคต</h2>
-            <p>นักพัฒนาซอฟต์แวร์ / วิศวกรอิเล็กทรอนิกส์ / Roblox Developer</p>
-        </div>
-
-        <div class="manga-card">
-            <div class="manga-tag">GOALS</div>
-            <h2>เป้าหมายระยะยาว</h2>
-            <p>สร้างแอปพลิเคชันและพัฒนาเกมบน Roblox ให้ผู้เล่นทั่วโลกได้สนุกด้วยกัน!</p>
+            <div class="manga-tag">ROUTINE</div>
+            <h2>ตารางประจำวัน</h2>
+            <ul class="schedule-list">
+                <li>🌅 <strong>07:00 - 08:00 น. :</strong> ตื่นนอน เตรีมตัวเดินทางไปวิทยาลัยเทคนิคเชียงใหม่</li>
+                <li>💻 <strong>08:00 - 15:30 น. :</strong> เรียนหนังสือ และปฏิบัติกิจกรรมการเรียน</li>
+                <li>🎮 <strong>16:00 - 18:00 น. :</strong> พักผ่อน เล่นเกม และพูดคุยกับเพื่อนๆ</li>
+                <li>⚡ <strong>19:00 - 21:00 น. :</strong> ทำการบ้าน ทบทวนบทเรียน</li>
+                <li>🌙 <strong>22:00 น. เป็นต้นไป :</strong> ฟังเพลง พักผ่อน เตรียมตัวเข้านอน</li>
+            </ul>
         </div>
     </div>
 
     <script>
-        // Glow Effect
         const glow = document.getElementById('cursorGlow');
         window.addEventListener('mousemove', (e) => {
             glow.style.left = e.clientX + 'px';
             glow.style.top = e.clientY + 'px';
         });
 
-        // Theme Switcher
         function toggleTheme() {
             document.body.classList.toggle('blue-theme');
             const isBlue = document.body.classList.contains('blue-theme');
@@ -423,7 +357,6 @@
             document.body.classList.add('blue-theme');
         }
 
-        // Clock & Weather & Visitor
         function updateClock() {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString('th-TH');
@@ -445,7 +378,6 @@
         let visits = localStorage.getItem('site_visits') || 100;
         document.getElementById('visitor-count').innerText = visits;
 
-        // BGM
         const bgmAudio = document.getElementById('bgmAudio');
         const bgmBtn = document.getElementById('bgmBtn');
         function toggleBGM() {
@@ -458,7 +390,6 @@
             }
         }
 
-        // Sakura Effect
         const sakuraCanvas = document.getElementById('sakura-canvas');
         const sCtx = sakuraCanvas.getContext('2d');
         function resizeSakura() {
@@ -510,7 +441,6 @@
         }
         animateSakura();
 
-        // --- Mascot Interactive & Games Logic ---
         const quotes = [
             "ถ้าไม่สู้... ก็ไม่มีวันชนะ! ⚔️",
             "ยินดีที่ได้คุยกันนะ! ตั้งใจเรียนและเล่นเกมให้สนุกนะ ✨",
@@ -521,38 +451,8 @@
         ];
 
         function onMascotClick() {
-            const menu = document.getElementById('mascotMenu');
-            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-
             const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
             document.getElementById('mascotText').innerText = randomQuote;
-        }
-
-        function drawFortune() {
-            const fortunes = [
-                "🔮 ดวงวันนี้: โชคดีขั้นสุด! เล่นเกม Roblox ชนะแน่นอน!",
-                "🔮 ดวงวันนี้: ราบรื่นดี การเรียนปัง ไร้ปัญหา!",
-                "🔮 ดวงวันนี้: พักผ่อนเยอะๆ แล้วความสุขจะมาเยือน!",
-                "🔮 ดวงวันนี้: มีเกณฑ์จะได้กินของอร่อยเร็วๆ นี้!"
-            ];
-            const result = fortunes[Math.floor(Math.random() * fortunes.length)];
-            document.getElementById('mascotText').innerText = result;
-        }
-
-        function playRPS(userChoice) {
-            const choices = ['ค้อน', 'กรรไกร', 'กระดาษ'];
-            const botChoice = choices[Math.floor(Math.random() * choices.length)];
-            let result = `ฉันออก ${botChoice}! `;
-
-            if (userChoice === botChoice) result += "เสมอเลยนะ! 🤝";
-            else if (
-                (userChoice === 'ค้อน' && botChoice === 'กรรไกร') ||
-                (userChoice === 'กรรไกร' && botChoice === 'กระดาษ') ||
-                (userChoice === 'กระดาษ' && botChoice === 'ค้อน')
-            ) result += "คุณชนะแล้ว... เก่งจัง! 🎉";
-            else result += "ฉันชนะล่ะ! ลองใหม่อีกทีนะ ⚔️";
-
-            document.getElementById('mascotText').innerText = result;
         }
     </script>
 </body>
