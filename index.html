@@ -366,22 +366,6 @@
             animation: floatBubble 2.5s infinite alternate ease-in-out;
         }
 
-        .mascot-menu {
-            display: none;
-            gap: 5px;
-            margin-bottom: 5px;
-        }
-
-        .mascot-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            cursor: pointer;
-        }
-
         .mascot-img {
             width: 110px;
             height: 110px;
@@ -420,16 +404,10 @@
     
     <audio id="bgmAudio" loop src="mysong.mp3.mp3"></audio>
 
-    <!-- มิคาสะ Mascot มุมขวาล่าง + Mini Game -->
+    <!-- มิคาสะ Mascot มุมขวาล่าง -->
     <div class="anime-mascot-container">
-        <div class="speech-bubble" id="mascotText">คลิกตัวฉันเพื่อเล่นสุ่มดวง/เป่ายิ้งฉุบได้นะ! ✨</div>
-        <div class="mascot-menu" id="mascotMenu">
-            <button class="mascot-btn" onclick="drawFortune()">🔮 สุ่มดวงวันนี้</button>
-            <button class="mascot-btn" onclick="playRPS('ค้อน')">✊ ค้อน</button>
-            <button class="mascot-btn" onclick="playRPS('กรรไกร')">✌️ กรรไกร</button>
-            <button class="mascot-btn" onclick="playRPS('กระดาษ')">✋ กระดาษ</button>
-        </div>
-        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img" onclick="toggleMascotMenu()">
+        <div class="speech-bubble" id="mascotText">ยินดีต้อนรับสู่เว็บของฉันนะ! ✨</div>
+        <img src="mikasa.jpg" alt="Mikasa Ackerman" class="mascot-img">
     </div>
 
     <div class="container">
@@ -558,7 +536,6 @@
             document.body.classList.toggle('blue-theme');
             const isBlue = document.body.classList.contains('blue-theme');
             localStorage.setItem('theme', isBlue ? 'blue' : 'red');
-            updateSakuraColor();
         }
         if (localStorage.getItem('theme') === 'blue') {
             document.body.classList.add('blue-theme');
@@ -677,39 +654,6 @@
             requestAnimationFrame(animateSakura);
         }
         animateSakura();
-
-        // Mascot Interactive & Games
-        function toggleMascotMenu() {
-            const menu = document.getElementById('mascotMenu');
-            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function drawFortune() {
-            const fortunes = [
-                "🔮 ดวงวันนี้: โชคดีขั้นสุด! เล่นเกมชนะรวดแน่นอน!",
-                "🔮 ดวงวันนี้: ราบรื่นดี การเรียนปัง ไร้ปัญหา!",
-                "🔮 ดวงวันนี้: พักผ่อนเยอะๆ แล้วความสุขจะมาเยือน!",
-                "🔮 ดวงวันนี้: มีเกณฑ์จะได้กินของอร่อยเร็วๆ นี้!"
-            ];
-            const result = fortunes[Math.floor(Math.random() * fortunes.length)];
-            document.getElementById('mascotText').innerText = result;
-        }
-
-        function playRPS(userChoice) {
-            const choices = ['ค้อน', 'กรรไกร', 'กระดาษ'];
-            const botChoice = choices[Math.floor(Math.random() * choices.length)];
-            let result = `ฉันออก ${botChoice}! `;
-
-            if (userChoice === botChoice) result += "เสมอเลยนะ! 🤝";
-            else if (
-                (userChoice === 'ค้อน' && botChoice === 'กรรไกร') ||
-                (userChoice === 'กรรไกร' && botChoice === 'กระดาษ') ||
-                (userChoice === 'กระดาษ' && botChoice === 'ค้อน')
-            ) result += "คุณชนะแล้ว... เก่งจัง! 🎉";
-            else result += "ฉันชนะล่ะ! ลองใหม่อีกทีนะ ⚔️";
-
-            document.getElementById('mascotText').innerText = result;
-        }
     </script>
 </body>
 </html>
